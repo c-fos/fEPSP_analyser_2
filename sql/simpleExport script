@@ -1,0 +1,1 @@
+select s.*, tmp.spikeNum from (select @idExp:=135 idExp, @spikeNum:=1 spikeNum) tmp, simpleExport s;
