@@ -1,0 +1,104 @@
+"""
+ 1. Connect and authenticate to one or more MySQL databases:
+
+          
+          
+             con <- dbConnect(MySQL(), group = "lasers")
+             con2 <- dbConnect(MySQL(), user="opto", password="pure-light", 
+                               dbname="lasers", host="merced")
+             
+
+       2. List tables and fields in a table:
+
+          
+          
+             dbListTables(con)
+             dbListFields(con, "table\_name")
+             
+
+       3. Import and export data.frames:
+   
+          
+             d <- dbReadTable(con, "WL")
+             dbWriteTable(con, "WL2", a.data.frame)         ## table from a data.frame
+             dbWriteTable(con, "test2", "~/data/test2.csv") ## table from a file
+             
+
+       4. Run an arbitrary SQL statement and extract all its output
+          (returns a data.frame):
+
+          
+          
+             dbGetQuery(con, "select count(*) from a\_table")
+             dbGetQuery(con, "select * from a\_table")
+             
+
+       5. Run an SQL statement and extract its output in pieces
+          (returns a result set):
+
+   
+             rs <- dbSendQuery(con, "select * from WL where width\_nm between 0.5 and 1")
+             d1 <- fetch(rs, n = 10000)
+             d2 <- fetch(rs, n = -1
+             
+
+       6. Run multiple SQL statements and process the various result
+          sets (note the ‘client.flag’ value in the ‘dbConnect’ call):
+
+          
+          
+             con <- dbConnection(MySQL(), dbname = "rs-dbi", 
+                       client.flag = CLIENT\_MULTI\_STATEMENTS)
+             script  <- paste("select * from WL where width\_nm between 0.5 and 1"
+                              "select * from lasers\_id  where id LIKE 'AL100
+                              sep = ";")
+             rs1 <- dbSendQuery(con, script)
+             d1 <- fetch(rs1, n = -1)
+             if(dbMoreResults(con)){
+                rs2 <- dbNextResult(con)
+                d2 <- fetch(rs2, n=-1)
+                     }             
+
+       7. Get meta-information on a connection (thread-id, etc.):
+
+          
+          
+             summary(MySQL(), verbose = TRUE)
+             summary(con, verbose = TRUE)
+             summary(rs, verbose = TRUE)
+             dbListConnections(MySQL())
+             dbListResultSets(con)
+             dbHasCompleted(rs)
+             
+
+       8. Close connections:
+
+          
+          
+             dbDisconnect(con)
+             dbDisconnect(con2)
+"""
+library("RMySQL")
+con <- dbConnect(MySQL(), user="filteruser_local", password="filter123",dbname="filterdb", host="localhost")
+dbListTables(con)
+dbListFields(con, "experiment")
+dbGetQuery(con, "select * from experiment")
+query1="SELECT `experiment`.`date`, `recordTags`.`tagName` AS `recordTag`, `record`.`time`, `responses`.`numberofspikes`, `responses`.`length`, `responses`.`vpsp`, `responses`.`epspFront`, `responses`.`epileptStd`, `spikes`.`ampl`, `spikes`.`length`, `spikes`.`maxDiff`, `spikes`.`angle1`, `spikes`.`angle2`, `spikes`.`delay` FROM `filterdb`.`experimentTags` AS `experimentTags`, `filterdb`.`experiment` AS `experiment`, `filterdb`.`record` AS `record`, `filterdb`.`recordToTags` AS `recordToTags`, `filterdb`.`recordTags` AS `recordTags`, `filterdb`.`responses` AS `responses`, `filterdb`.`signalProperties` AS `signalProperties`, `filterdb`.`spikes` AS `spikes`, `filterdb`.`tagTable` AS `tagTable` WHERE `experimentTags`.`experiment_idexperiment` = `experiment`.`idexperiment` AND `record`.`experiment_idexperiment` = `experiment`.`idexperiment` AND `recordToTags`.`record_idrecord` = `record`.`idrecord` AND `recordToTags`.`recordTags_idrecordTags` = `recordTags`.`idrecordTags` AND `responses`.`record_idrecord` = `record`.`idrecord` AND `signalProperties`.`record_idrecord` = `record`.`idrecord` AND `spikes`.`responses_idresponses` = `responses`.`idresponses` AND `experimentTags`.`tagTable_tagId` = `tagTable`.`tagId` AND `tagTable`.`tagName` = 'test7' AND `spikes`.`number` = 1 AND `responses`.`number` = 1 ORDER BY `experiment`.`date` ASC, `record`.`time` ASC"
+rs <- dbSendQuery(con, query1)
+d1 <- fetch(rs, n=-1)
+d2 <- d1[d1$recordTag == "инкубация",]
+step1<-d2[,3:14]
+data<-unique(d2[,1])
+#for i in data: step1[d2[,1]==i]
+step1[,1]<-as.matrix(strptime(step1[,1],"%H:%M:%S") - strptime(step1[1,1],"%H:%M:%S"))
+#for i in [4:12]:
+    step1[,4]<-log((step1[,4]/step1[1,4]))
+    dataLenght=length(step1[,4])
+    newLength=round(max(step1[,1])-min(step1[,1]))
+	#interpolation
+	tempSmooth1=lowess(step1[,1],step1[,4],f = 0.1)#this variable has not include enouth points
+	tempSmooth2=approx(tempSmooth1$x,tempSmooth1$y,n=newLength+1)
+	tempSmooth2
+dbDisconnect(con)
+
+

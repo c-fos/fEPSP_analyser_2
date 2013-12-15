@@ -20,6 +20,9 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, Date, DateTime, Boolean, Float, Column, Integer, String, Table
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
+import logging
+
+logger = logging.getLogger("workflow.dbAccess")
 
 ## Класс, в методах которого реализованны необходимые обращения к БД.
 #
@@ -57,6 +60,8 @@ class Mysql_writer:
         self.numberofspikes = 0
         self.ampl = 0
         self.number = 0
+        self.date = ''
+        self.tagString = ''
         self.dbServerIp = 'localhost'
         self.userName = 'filteruser_local'
         self.userPassword = 'filter123'
@@ -71,19 +76,19 @@ class Mysql_writer:
         self.filePath = filePath
         self.tagString = tagString
         self.date= dt.date.fromtimestamp(stat(filePath).st_mtime)
-        print("loadExpInfo # Имя файла: {0}, строка тэгов: {1}, дата: {2}".format(self.filePath, self.tagString, self.date))
+        logger.info("loadExpInfo # Имя файла: {0}, строка тэгов: {1}, дата: {2}".format(self.filePath, self.tagString, self.date))
 
     ## Запись в БД тегов эксперимента и связывание тегов с экспериментом
     def tagWriter(self):
         tagList= self.tagString.split(',')
-        print("tagWriter # tagList: {0}".format(tagList))
+        logger.info("tagWriter # tagList: {0}".format(tagList))
         if tagList:
             exp = self.session.query(db.Experiment).filter(db.Experiment.id == self.idExperiment).one()
-            print("tagWriter # exp.id: {0}".format(exp.id))
+            logger.warn("tagWriter # exp.id: {0}".format(exp.id))
             for i in tagList:
-                print("tagWriter # Обрабатываем тэг {0}".format(i))
+                logger.warn("tagWriter # Обрабатываем тэг {0}".format(i))
                 tagInst = self.tagCheck(i, 'expTag')
-                print("tagWriter # tagInst {0}".format(tagInst))
+                logger.warn("tagWriter # tagInst {0}".format(tagInst))
                 exp.tag.append(tagInst)
 
     ## Функция возвращает id тэга, если такого тега нет, то предварительно создает его.
@@ -94,14 +99,14 @@ class Mysql_writer:
         if table == 'expTag':
             tagExist = self.session.query(db.expTag).filter(db.expTag.name == tag).first()
             if not tagExist:
-                print("there are no '{0}' tag. {1}".format(tag, sys.exc_info()))
+                logger.info("there are no '{0}' tag.".format(tag))
                 tagExist = db.expTag(tag)
                 self.session.add(tagExist)
                 self.session.commit()
         else:
             tagExist = self.session.query(db.recTag).filter(db.recTag.name == tag).first()
             if not tagExist:
-                print("there are no '{0}' tag. {1}".format(tag, sys.exc_info()))
+                logger.info("there are no '{0}' tag.".format(tag))
                 tagExist = db.recTag(tag)
                 self.session.add(tagExist)
                 self.session.commit()
@@ -123,7 +128,7 @@ class Mysql_writer:
             self.userPassword = dbAccessVars[3]
             self.dbName = dbAccessVars[1]
         except:
-            print("Load default database config")
+            logger.info("Load default database config")
 
     ## Загрузка значений переменных для записи в БД проанализированной информации.
     #
@@ -148,7 +153,7 @@ class Mysql_writer:
             self.session = Session()
 
         except:
-            print("Db connect error: {0}. Exit!".format(sys.exc_info()))
+            logger.critical("Db connect error: {0}. Exit!".format(sys.exc_info()))
             sys.exit(1)
 
     ## Сохранение информации об эксперименте.
@@ -162,7 +167,7 @@ class Mysql_writer:
         self.session.add(newExp)
         self.session.commit()
         self.idExperiment = newExp.id
-        print("dbWriteExperiment # Создана запись в таблице Experiment, id={0}".format(self.idExperiment))
+        logger.warn("dbWriteExperiment # Создана запись в таблице Experiment, id={0}".format(self.idExperiment))
 
     ## Сохранение информации об отдельной записи (один .dat файл)
     #
@@ -175,7 +180,7 @@ class Mysql_writer:
         self.session.add(newRecord)
         self.session.commit()
         self.idRecord = newRecord.id
-        print("dbWriteRecord # Создана запись в таблице record, id={0}".format(self.idRecord))
+        logger.warn("dbWriteRecord # Создана запись в таблице record, id={0}".format(self.idRecord))
 
     ## Добавление исходных данных в БД
     #
@@ -188,21 +193,6 @@ class Mysql_writer:
         self.session.add(record)
         self.session.commit()
 
-    ## Поиск в имени файла ключевых слов
-    #
-    #  Используется для того чтобы определить к какому этапу эксперимента
-    #  относится анализируемая запись. Для работу требуется чтобы в имени файла
-    #  было ключевое слово, позволяющее отнести запись к этапу эксперимента.
-    #  @param tagString Название файла.
-    #  @param tagDict Словарь разрешенных ключевых слов.
-    #  @param tagMask Список запрещенных ключевых слов.
-    #
-    def findTags(self, tagString, tagDict, tagMask):
-        tagList=[]
-        for i in tagDict.keys():
-            if (i in tagString) and (all([j not in tagString for j in tagMask])):
-                tagList.append(tagDict[i])
-        return tagList
 
     ## Получение полного списка проанализированных экспериментов.
     #
@@ -226,7 +216,7 @@ class Mysql_writer:
                                            db.Experiment.id == _idExp,\
                                            db.Spike.number == _spikeNum).\
                                     order_by(db.Record.time)
-        print("getDataToExport # _idExp={0}, _spikeNum={1}, exportData.count()={2}".format(_idExp, _spikeNum, exportData.count()))
+        logger.warn("getDataToExport # _idExp={0}, _spikeNum={1}, exportData.count()={2}".format(_idExp, _spikeNum, exportData.count()))
         return exportData.all()
 
     ## Сохранение тегов для этапов эксперимента и их связей с анализируемым файлом.
@@ -234,10 +224,26 @@ class Mysql_writer:
     #  @param filename Имя анализируемого .dat файла.
     #
     def dbWriteRecordTags(self, filename):
-        tagList = self.findTags(filename, (self.rTagDict), (self.rTagMask))
+        ## Поиск в имени файла ключевых слов
+        #
+        #  Используется для того чтобы определить к какому этапу эксперимента
+        #  относится анализируемая запись. Для работу требуется чтобы в имени файла
+        #  было ключевое слово, позволяющее отнести запись к этапу эксперимента.
+        #  @param tagString Название файла.
+        #  @param tagDict Словарь разрешенных ключевых слов.
+        #  @param tagMask Список запрещенных ключевых слов.
+        #
+        def findTags(tagString, tagDict, tagMask):
+            tagList=[]
+            for i in tagDict.keys():
+                if (i in tagString) and (all([j not in tagString for j in tagMask])):
+                    tagList.append(tagDict[i])
+            return tagList
+
+        tagList = findTags(filename, (self.rTagDict), (self.rTagMask))
         if not tagList:
             tagList = ["-"]
-        print("dbWriteRecordTags # tagList: {0}".format(tagList))
+        logger.warn("dbWriteRecordTags # tagList: {0}".format(tagList))
         rec = self.session.query(db.Record).filter(db.Record.id == self.idRecord).one()
         for i in tagList:
             rec.tag.append(db.recTag(i))
@@ -252,7 +258,7 @@ class Mysql_writer:
         epsp = tmpObject.epsp*self.koef
         nOfSpikes = len(tmpObject.spikes)
         rLength = tmpObject.length
-        epspArea = tmpObject.epspArea
+        #epspArea = tmpObject.epspArea
         epspFront = tmpObject.epspFront
         epspBack = tmpObject.epspBack
         epilept = tmpObject.epspEpileptStd
@@ -261,7 +267,7 @@ class Mysql_writer:
         self.session.add(newRespons)
         self.session.commit()
         self.idResponse = newRespons.id
-        print("dbWriteResponse # Создана запись в таблице response, id={0}".format(self.idResponse))
+        logger.warn("dbWriteResponse # Создана запись в таблице response, id={0}".format(self.idResponse))
 
     ## Обновляет информацию о количестве групп спайков в записи
     #
@@ -320,12 +326,13 @@ class Mysql_writer:
     ## Удаление эксперимента
     #
     # Удаление эксперимента целиком или очистка ответов и спайков
-    def deleteExp(self, id, complete = True):
-        exp = self.session.query(db.Experiment).filter(db.Experiment.id == id).first()
+    def deleteExp(self, _id, complete = True):
+        exp = self.session.query(db.Experiment).filter(db.Experiment.id == _id).first()
         if complete:
             self.session.delete(exp)
         else:
-            responses = self.session.query(db.Response).filter(db.Response.record == db.Record.id, db.Record.experiment == id).all()
+            responses = self.session.query(db.Response).filter(db.Response.record == db.Record.id,
+                                                               db.Record.experiment == _id).all()
             for i in responses:
                 self.session.delete(i)
         self.session.commit()
@@ -376,49 +383,10 @@ class Mysql_writer:
         self.session.add(wLevel)
 
     ## Сохраняем информацию для поиска стимулов
-    def dbStimProp_write(self, number, length, ptp_1, ptp_2, std_1, std_2, median_1, median_2, mean_1, mean_2, median_diff_1, median_diff_2, std_diff, ptp_diff, stim, auto):
-        stim = db.StimProp(number, length, ptp_1, ptp_2, std_1, std_2, median_1, median_2, mean_1, mean_2, median_diff_1, median_diff_2, std_diff, ptp_diff, stim, auto, self.idTech)
+    def dbStimProp_write(self, number, length, ptp_1, ptp_2, std_1, std_2,
+                         median_1, median_2, mean_1, mean_2, median_diff_1,
+                         median_diff_2, std_diff, ptp_diff, stim, auto):
+        stim = db.StimProp(number, length, ptp_1, ptp_2, std_1, std_2, median_1,
+                           median_2, mean_1, mean_2, median_diff_1, median_diff_2,
+                           std_diff, ptp_diff, stim, auto, self.idTech)
         self.session.add(stim)
-
-    ## Сохранение информации о характеристиках стимула
-    #
-    #  Используется для обучения нейронной сети отличать шум от стимулов.
-    #
-    #def dbWriteStim(self, base_sample, sample, length, number, status, freq, sampleStdDiff, samplePtpDiff):
-    #    try:
-    #        length = str(length*100000.0/freq)
-    #        try:
-    #            ptp = str(sample.ptp()*0.1)
-    #        except:
-    #            ptp = str(0)
-    #        try:
-    #            base_ptp = str(base_sample.ptp()*0.1)
-    #        except:
-    #            base_ptp = str(0)
-    #        std = str(sample.std())
-    #        median1 = str(median(sample)*0.1)
-    #        mean = str(sample.mean()*0.1)
-    #        base_mean = str(base_sample.mean()*0.1)
-    #        base_median = str(median(base_sample)*0.1)
-    #        base_std = str(base_sample.std())
-    #        number = str(number)
-    #        diff_median = str(median(diff(sample*1.0)))
-    #        base_diff_median = str(median(diff(base_sample*1.0)))
-    #    except:
-    #        print("Unexpected error wile dbWriteStim configuration: {0}".format(sys.exc_info()))
-    #    cursor = self.conn.cursor()
-    #    try:
-    #        cursor.execute("INSERT INTO stimProperties(length, ptp, base_ptp,\
-    #                       std, median, mean, base_mean, base_median,\
-    #                       base_std,\
-    #                       number, status, diff_median, base_diff_median,\
-    #                       sampleStdDiff, samplePtpDiff)\
-    #                       VALUES({0},{1},{2},{3},\
-    #                       {4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14});\
-    #                       ".format(length, ptp, base_ptp, std, median1, mean,
-    #                       base_mean, base_median, base_std, number, status,
-    #                       diff_median, base_diff_median, sampleStdDiff, samplePtpDiff))
-    #    except:
-    #        print("Unexpected error wile dbWriteStim in dbAccess:", sys.exc_info())
-    #    self.conn.commit()
-    #    cursor.close()

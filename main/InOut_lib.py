@@ -15,6 +15,9 @@ from numpy import loadtxt, fromfile, int16
 from matplotlib.patches import Rectangle
 import matplotlib.pyplot as plt
 import array_prepare as ap
+import logging
+
+logger = logging.getLogger("workflow.InOut")
 
 ## Загрузка массива из файла
 #
@@ -42,12 +45,11 @@ def dataLoading(fileName):
 #  частоту.
 #
 #
-def freqLoad(filename, defFrequ, debug, varName = "CodingFreq"):
+def freqLoad(filename, defFrequ, varName = "CodingFreq"):
     try:
         dictionary = {}
         iniName = "{0}.ins".format(filename.strip('.dat'))
-        if debug:
-            print("freqLoad # .ins file name: {0}".format(iniName))
+        logger.warn("freqLoad # .ins file name: {0}".format(iniName))
         fd = file(iniName,'r')
         for line in fd.readlines():
             pairs = line.split("=")
@@ -55,19 +57,14 @@ def freqLoad(filename, defFrequ, debug, varName = "CodingFreq"):
                 dictionary[variable] = value.strip()
         frequency = int(dictionary[varName].strip()) * 1000
     except:
-        print("freqLoad # Error: {0}".format(sys.exc_info()))
+        logger.error("freqLoad # Error: {0}".format(sys.exc_info()))
         frequency = int(defFrequ)
-    if debug:
-        print("freqLoad # Frequency = {0}Hz".format(frequency))
+    logger.warn("freqLoad # Frequency = {0}Hz".format(frequency))
     return frequency
 
-def plotData(analyserObj, debug):
-    if debug:
-        fig, axes_list = plt.subplots(3, 1, sharex=True)
-        ax = axes_list[0]
-    else:
-        fig, ax = plt.subplots(1, 1)
-        fig.canvas.set_window_title(analyserObj.fileName.split("/")[-1])
+def plotData(analyserObj):
+    fig, ax = plt.subplots(1, 1)
+    fig.canvas.set_window_title(analyserObj.fileName.split("/")[-1])
     ax.plot(analyserObj.cleanData,'y')
     try:
         ax.plot(analyserObj.result,'b')
@@ -77,13 +74,17 @@ def plotData(analyserObj, debug):
             analyserObj.softError=1
         ax.grid(color='k', linestyle='-', linewidth=0.4)
         try:
-            print("plotData # analyserObj.responseDict: {0}".format(analyserObj.responseDict))
+            logger.warn("plotData # analyserObj.responseDict: {0}".format(analyserObj.responseDict))
             for i in analyserObj.responseDict.values():
                 tmpObject=getattr(analyserObj,i)
-                print("plotData # tmpObject created")
-                rect = Rectangle((tmpObject.responseStart, tmpObject.response_bottom), tmpObject.responseEnd-tmpObject.responseStart, tmpObject.response_top-tmpObject.response_bottom, facecolor="#aaaaaa", alpha=0.3)
+                logger.warn("plotData # tmpObject created")
+                rect = Rectangle((tmpObject.responseStart, tmpObject.response_bottom),
+                                 tmpObject.responseEnd-tmpObject.responseStart,
+                                 tmpObject.response_top-tmpObject.response_bottom,
+                                 facecolor="#aaaaaa", alpha=0.3)
                 ax.add_patch(rect)
-                ax.text(tmpObject.responseStart,tmpObject.response_top+20, "EPSP="+str(tmpObject.epsp), fontsize=12, va='bottom')
+                ax.text(tmpObject.responseStart,tmpObject.response_top+20,
+                        "EPSP="+str(tmpObject.epsp), fontsize=12, va='bottom')
                 try:
                     for j in tmpObject.spikes:
                         tmpObject2=getattr(analyserObj,j)
@@ -91,17 +92,23 @@ def plotData(analyserObj, debug):
                         ax.plot(tmpObject2.spikeMin,analyserObj.result[tmpObject2.spikeMin],'or')
                         ax.plot(tmpObject2.spikeMax1,analyserObj.result[tmpObject2.spikeMax1],'og')
                         ax.plot(tmpObject2.spikeMax2,analyserObj.result[tmpObject2.spikeMax2],'og')
-                        ax.vlines(tmpObject2.spikeMin,analyserObj.result[tmpObject2.spikeMin], analyserObj.result[tmpObject2.spikeMin]+tmpObject2.spikeAmpl, color='k', linestyles='dashed')
-                        ax.text(tmpObject2.spikeMin,analyserObj.result[tmpObject2.spikeMin]-15, tex, fontsize=12, va='bottom')
+                        ax.vlines(tmpObject2.spikeMin,analyserObj.result[tmpObject2.spikeMin],
+                                  analyserObj.result[tmpObject2.spikeMin]+tmpObject2.spikeAmpl,
+                                  color='k',
+                                  linestyles='dashed')
+                        ax.text(tmpObject2.spikeMin,analyserObj.result[tmpObject2.spikeMin]-15,
+                                tex,
+                                fontsize=12,
+                                va='bottom')
                 except:
-                    print("plotData # Error wile spike ploating: {0}".format(sys.exc_info()))
+                    logger.error("plotData # Error wile spike ploating: {0}".format(sys.exc_info()))
         except:
-            print("plotData # Error wile ploating: {0}".format(sys.exc_info()))
+            logger.error("plotData # Error wile ploating: {0}".format(sys.exc_info()))
             analyserObj.hardError=1
         for i in range(len(analyserObj.stimuli[0])):
             ax.axvline(x=analyserObj.stimuli[0][i],color='g')
     except:
-        print("plotData # Error wile ploating computedData: {0}".format(sys.exc_info()))
+        logger.error("plotData # Error wile ploating computedData: {0}".format(sys.exc_info()))
         analyserObj.hardError=1
     plt.savefig(analyserObj.fileName+"_graph.png")
     plt.close()
@@ -111,7 +118,9 @@ def writeExport(fileName, data):
     fd = open(fileName, "w")
     fd.write("Название эксперимента,Имя файла,Номер спайка,Время изменения файла,Амплитуда\n")
     for line in data:
-        fd.write("{0},{1},{2},{3},{4}\n".format(line[0], line[1], int(line[2]), str(line[3]), line[4]))
+        fd.write("{0},{1},{2},{3},{4}\n".format(line[0], line[1], int(line[2]),
+                                                str(line[3]), line[4]))
     fd.close()
-    print("writeExport # Filename: {0}, Data length: {1}".format(fileName, len(data)))
+    logger.info("writeExport # Filename: {0}, Data length: {1}".format(fileName,
+                                                                       len(data)))
 

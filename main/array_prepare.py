@@ -12,6 +12,9 @@ Created on 05.12.2011
 from numpy import math, empty
 import array_processing_functions as ar
 import sys
+import logging
+
+logger = logging.getLogger("workflow.array_prepare")
 
 
 ## приводит массив к размеру 2^x
@@ -30,13 +33,13 @@ def dataFitting(data):
         dataLen = len(data)
         tmp = 2**(math.ceil(math.log(dataLen, 2)))
         delta = tmp - dataLen
-        meanTmp = ar.histMean(data[:dataLen/4])
+        meanTmp = ar.histMean(data[:dataLen / 4])
         newData = empty(tmp, dtype='float32')
         newData.fill(meanTmp)
-        newData[delta:]=data
+        newData[delta:] = data
         return newData, delta
     except:
-        print("dataFitting # Error: {0}".format(sys.exc_info()))
+        logger.error("dataFitting # Error: {0}".format(sys.exc_info()))
 
 ## Если запись велась в режиме 5мв/дел домножаем массив на коэфициент
 #
@@ -46,8 +49,8 @@ def dataFitting(data):
 #
 def amplLoad(filename, data):
     if ("5мв" in filename) or ("5мВ" in filename) or ("5mv" in filename) or ("5mV" in filename):
-        print("amplLoad # 5mv amplifier")
-        return(data*2.5)  # *5/2
+        logger.warn("amplLoad # 5mv amplifier")
+        return(data * 2.5)  # *5/2
     else:
         return data
 

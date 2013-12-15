@@ -29,6 +29,9 @@ import rInterface_lib as rInterface
 import array_processing_functions as ar
 #import main.array_prepare as ap
 import InOut_lib as ioLib
+import logging
+
+logger = logging.getLogger("workflow.analyser")
 
 class dataSample:
     def __init__(self, filename, dbobject, argDict):
@@ -68,48 +71,45 @@ class dataSample:
 
 
     def dataProcessing(self):
-        if self.argDict["debug"]:
-            print("File name: {0}".format(self.fileName))
+        logger.info("File name: {0}".format(self.fileName))
         try:
             self.frequency = ioLib.freqLoad(self.fileName,
-                                            self.argDict["frequ"],
-                                            self.argDict["debug"])
+                                            self.argDict["frequ"])
         except:
-            print "ioLib.freqLoad() error:", sys.exc_info()
+            logger.error("ioLib.freqLoad() error: {0}".format(sys.exc_info()))
         try:
             self.data, self.deltaLen, self.source_data = ioLib.dataLoading(self.fileName)
         except:
-            print "dataLoading() error:", sys.exc_info()
+            logger.error("dataLoading() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         try:
             self.mysql_writer.addSource(self.frequency, self.source_data)
         except:
-            print "addSource() error:", sys.exc_info()
+            logger.error("addSource() error: {0}".format(sys.exc_info()))
         try:
             self.tresholdCreating()
         except:
-            print "tresholdCreating() error:", sys.exc_info()
+            logger.error("tresholdCreating() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         try:
             self.mysql_writer.dbWriteTechInfo(self.defaultFrame, self.stimulyDuration)
         except:
-            print "Unexpected error wile dbWriteTechInfo:", sys.exc_info()
+            logger.error("Unexpected error wile dbWriteTechInfo: {0}".format(sys.exc_info()))
         try:
             self.cleanData = self.cutStimuli(self.data)
         except:
-            print "cutStimuli() error:", sys.exc_info()
+            logger.error("cutStimuli() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         try:
             self.snr, self.signalPtp, self.signalStd = ar.snrFinding(self.cleanData[self.deltaLen+self.stimulyDuration:],
-                                                                     self.defaultFrame,
-                                                                     self.argDict["debug"])
+                                                                     self.defaultFrame)
         except:
-            print "snrFinding() error:", sys.exc_info()
+            logger.error("snrFinding() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         try:
-            self.mainLevelFinding(self.argDict["debug"])
+            self.mainLevelFinding()
         except:
-            print "mainLevelFinding() error:", sys.exc_info()
+            logger.error("mainLevelFinding() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         self.mysql_writer.dbTechInfo_level(self.snr, self.signalPtp,
                                            self.signalStd, self.mainLevel)
@@ -117,51 +117,53 @@ class dataSample:
             self.resultRough = self.filtering(self.argDict["smooth"])
             self.result = self.filtering(self.argDict["smooth"]-5)
         except:
-            print "filtering() error:", sys.exc_info()
+            logger.error("filtering() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         try:
             self.spikeFinding()
         except:
-            print "spikeFinding() error:", sys.exc_info()
+            logger.error("spikeFinding() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         try:
             self.clusters = clusterization(self, self.spikeDict, self.stimuli)
         except:
-            print "clusterization() error:", sys.exc_info()
+            logger.error("clusterization() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         try:
             clusterAnalyser(self, self.spikeDict, self.clusters)
         except:
-            print "clusterAnalyser() error:", sys.exc_info()
+            logger.error("clusterAnalyser() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         try:
             self.responsMatrix = self.responsLength()
         except:
-            print "responsLength() error:", sys.exc_info()
+            logger.error("responsLength() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         try:
             self.responsAnalysis()
         except:
-            print "responsAnalysis() error:", sys.exc_info()
+            logger.error("responsAnalysis() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         try:
-            ioLib.plotData(self, self.argDict["debug"])
+            ioLib.plotData(self)
         except:
-            print "plotData() error:", sys.exc_info()
+            logger.error("plotData() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         if self.mysql_writer!="pass":
             try:
                 self.writeData()
             except:
-                print "writeData() error:", sys.exc_info()
+                logger.error("writeData() error: {0}".format(sys.exc_info()))
                 self.hardError = 1
             if self.hardError!=0 or self.softError!=0:
                 try:
                     self.mysql_writer.dbWriteError(self.softError,
                                                    self.hardError)
                 except:
-                    print "dbWriteError error:", sys.exc_info()
+                    logger.error("dbWriteError error: {0}".format(sys.exc_info()))
                     self.hardError = 1
+
+
     ## Расчет велечины некоторых переменных, зависящих от частоты записи
     #
     #  После того как частота определена, расчитывается размер милисекунды, а
@@ -188,12 +190,12 @@ class dataSample:
         filterSize = pywt.Wavelet(wavelet).dec_len
         pwr = pywt.swt(data, wavelet, 2)
         pwr2 = array(pwr[0][1])  # вейвлет коефициенты высокочастотной составляющей сигнала
-        pwr2Std = ar.stdFinder(pwr2[self.deltaLen:], self.defaultFrame, self.argDict["debug"])
+        pwr2Std = ar.stdFinder(pwr2[self.deltaLen:], self.defaultFrame)
         treshold = pwr2Std*1.5*log(pwr2.ptp()/pwr2Std)#11 - empirical finding coef
         try:
             self.mysql_writer.dbTechInfo_stim(pwr2Std, treshold)
         except:
-            print("findStimuli # Error: {0}".format(sys.exc_info()))
+            logger.warn("findStimuli # Error: {0}".format(sys.exc_info()))
 
         pwr5 = zeros(len(pwr2))
         # pwr5 по сути первая производная от вейвлет коефициентов
@@ -258,22 +260,21 @@ class dataSample:
                                                    std_diff, ptp_diff,
                                                    neuroTestResult, 1)
                 except:
-                    print("findStimuli # Error when write stim prop: {0}".format(sys.exc_info()))
+                    logger.error("findStimuli # Error when write stim prop: {0}".format(sys.exc_info()))
 
                 if neuroTestResult:
-                    print("findStimul # Accepted! Start: {0}, ptp_diff: {1}, std_diff: {2}, sampleSumDiff: {3}, sampleGlobalStd: {4}".format(dpwr[i]+filterSize, ptp_diff, std_diff, sampleSumDiff, sampleGlobalStd))
+                    logger.warn("findStimul # Accepted! Start: {0}, ptp_diff: {1}, std_diff: {2}, sampleSumDiff: {3}, sampleGlobalStd: {4}".format(dpwr[i]+filterSize, ptp_diff, std_diff, sampleSumDiff, sampleGlobalStd))
                     #self.mysql_writer.dbWriteStim(sample2, sample1, length1, i, "1", self.frequency, std_diff, ptp_diff)
                 else:
                     dpwrMask[i] = 0
                     #self.mysql_writer.dbWriteStim(sample2, sample1, length1, i, "0", self.frequency, std_diff, ptp_diff)
-                    print("findStimuli # Dropped! Start: {0}, ptp_diff: {1}, std_diff: {2}, sampleSumDiff: {3}, sampleGlobalStd: {4}".format(dpwr[i]+filterSize, ptp_diff, std_diff, sampleSumDiff, sampleGlobalStd))
+                    logger.warn("findStimuli # Dropped! Start: {0}, ptp_diff: {1}, std_diff: {2}, sampleSumDiff: {3}, sampleGlobalStd: {4}".format(dpwr[i]+filterSize, ptp_diff, std_diff, sampleSumDiff, sampleGlobalStd))
             else:
                 dpwrMask[i] = 0
                 #self.mysql_writer.dbWriteStim(sample2, sample1, length1, i, "0", self.frequency, std_diff, ptp_diff)
-                print("findStimuli # Dropped! Start: {0}, ptp_diff: {1}, std_diff: {2}, sampleSumDiff: {3}, sampleGlobalStd: {4}".format(dpwr[i]+filterSize, ptp_diff, std_diff, sampleSumDiff, sampleGlobalStd))
+                logger.warn("findStimuli # Dropped! Start: {0}, ptp_diff: {1}, std_diff: {2}, sampleSumDiff: {3}, sampleGlobalStd: {4}".format(dpwr[i]+filterSize, ptp_diff, std_diff, sampleSumDiff, sampleGlobalStd))
         dpwr = dpwr[dpwrMask]
-        if self.argDict["debug"]:
-            print("findStimuli # Number of finded stimuls: {0}".format(len(dpwr)))
+        logger.info("findStimuli # Number of finded stimuls: {0}".format(len(dpwr)))
         stimList=[[],[]]
         for i in range(len(dpwr)):
             start = dpwr[i]+filterSize*2
@@ -288,8 +289,7 @@ class dataSample:
             if tmpStop+self.defaultFrame+5 > len(data):
                 tmpStop = len(data)-self.defaultFrame-5
             stimMean = data[start:tmpStop].mean()
-            if self.argDict["debug"]:
-                print("findStimuli # Baseline: {0}, baseStd: {1}, start: {2}, tmpStop: {3}, stimMean: {4}".format(baseline, baseStd, start, tmpStop, stimMean))
+            logger.warn("findStimuli # Baseline: {0}, baseStd: {1}, start: {2}, tmpStop: {3}, stimMean: {4}".format(baseline, baseStd, start, tmpStop, stimMean))
             try:
                 sample = signal.medfilt(data[tmpStop-5:tmpStop+self.defaultFrame+5], int(self.stimulyDuration/20))
             except:
@@ -298,21 +298,19 @@ class dataSample:
             secondArray = abs(sample[1:]-baseline) < baseStd/2
             fourthArray = ar.stdArray(sample[1:], 5) <= baseStd*3
             fivthArray = abs(sample[1:]-baseline) < baseStd*4
-            if self.argDict["debug"]:
-                print("findStimuli # {0}".format((any(firstArray), any(secondArray), any(fourthArray), any(fivthArray))))
+            logger.warn("findStimuli # {0}".format((any(firstArray), any(secondArray), any(fourthArray), any(fivthArray))))
             try:
                 shift = where((firstArray*fivthArray+secondArray)*fourthArray)[0]
                 if len(shift) > 0:
                     realStop = tmpStop+shift[0]
                 else:
                     realStop = tmpStop
-                    print("findStimuli # Can`t find stimulum end =(")
+                    logger.warn("findStimuli # Can`t find stimulum end =(")
                     self.softError = 1
             except:
-                print "findSimuli # Unexpected error in finding of stimuli end:", sys.exc_info()
+                logger.error("findSimuli # Unexpected error in finding of stimuli end:{0}".format(sys.exc_info()))
                 realStop = tmpStop
-            if self.argDict["debug"]:
-                print("findStimuli", (start, tmpStop, realStop, "start, tmpStop and stop of stimule"))
+            logger.warn("findStimuli # start {0}, tmpStop {1}, realStop {2}".format(start, tmpStop, realStop))
             stimList[0]+=[start]
             stimList[1]+=[realStop]
         self.stimuli = stimList
@@ -322,13 +320,12 @@ class dataSample:
         try:
             self.findStimuli(data)
         except:
-            print("cutStimuli # Error: {0}".format(sys.exc_info()))
+            logger.error("cutStimuli # Error: {0}".format(sys.exc_info()))
         stim = self.stimuli[0]
         if stim:
             processedData = zeros(len(data), dtype='int')
             processedData += data
-            if self.argDict["debug"]:
-                print("cutStimuli # Start")
+            logger.warn("cutStimuli # Start")
             for i in range(len(stim)):
                 try:
                     if stim[i] < self.stimulyDuration:
@@ -338,12 +335,10 @@ class dataSample:
                     processedData[stim[i]:self.stimuli[1][i]] = patchValue
                 except:
                     self.hardError = 1
-            if self.argDict["debug"]:
-                print("cutStimuli # End")
+            logger.warn("cutStimuli # End")
             return processedData
         else:
-            if self.argDict["debug"]:
-                print("cutStimuli # End")
+            logger.warn("cutStimuli # End")
             return data
 
     ## Определение основного уровня вейвлет разложения
@@ -352,10 +347,9 @@ class dataSample:
     #  основная часть интересующего нас сигнала и который нужно
     #  искажать минимально
     #
-    def mainLevelFinding(self, debug):
+    def mainLevelFinding(self):
         self.mainLevel = int(math.log((self.baseFrequency * (0.5 + sqrt(sqrt(self.snr)) / 2)) / self.frequency, 0.5) - 1.4)  # magic
-        if debug:
-            print("mainLevelFinding # self.mainLevel: {0}, self.snr: {1}".format(self.mainLevel, self.snr))
+        logger.warn("mainLevelFinding # self.mainLevel: {0}, self.snr: {1}".format(self.mainLevel, self.snr))
 
     ## Фильтрация сигнала
     #
@@ -374,15 +368,13 @@ class dataSample:
                 maxSD = 0
                 snr = 0
                 smoothCoef = 0
-                if self.argDict["debug"]:
-                    print("filtering # noisLevel: {0}".format(i))
+                logger.warn("filtering # noisLevel: {0}".format(i))
             else:
-                minSD = ar.stdFinder(cD[self.deltaLen:], self.defaultFrame, self.argDict["debug"])
-                maxSD = ar.getLocalPtp(cD[self.deltaLen:], self.defaultFrame*0.8, self.argDict["debug"])
+                minSD = ar.stdFinder(cD[self.deltaLen:], self.defaultFrame)
+                maxSD = ar.getLocalPtp(cD[self.deltaLen:], self.defaultFrame*0.8)
                 snr = maxSD / minSD
                 smoothCoef = minSD*(coeffTreshold*(snr**(i**(0.7)/(i**(1.5)+i+1)))+i*2)
-                if self.argDict["debug"]:
-                    print("filtering # minSD: {0}, maxSD: {1}, snr: {2}, level: {3}, smoothCoef: {4}".format(minSD, maxSD, snr, i, smoothCoef))
+                logger.warn("filtering # minSD: {0}, maxSD: {1}, snr: {2}, level: {3}, smoothCoef: {4}".format(minSD, maxSD, snr, i, smoothCoef))
                 cD = pywt.thresholding.soft(cD, smoothCoef)
             self.mysql_writer.dbWaveLevel_write(coeffTreshold, i, minSD, maxSD, smoothCoef)
             coeffs[i] = cA, cD
@@ -409,11 +401,10 @@ class dataSample:
         maximum = array(tmpMaximum)
         maximum.sort()
         maximumValue = resultData[maximum + start]
-        std = ar.stdFinder(self.cleanData[self.deltaLen:], self.defaultFrame, self.argDict["debug"])
+        std = ar.stdFinder(self.cleanData[self.deltaLen:], self.defaultFrame)
         SD = float16(std + std*self.snr**(0.25) / 4) # another magic
         self.mysql_writer.dbTechInfo_clean(std, SD)
-        if self.argDict["debug"]:
-            print ("spikeFinding # snr: {0}, std: {1}, SD: {2}".format(self.snr, std, SD))
+        logger.warn("spikeFinding # snr: {0}, std: {1}, SD: {2}".format(self.snr, std, SD))
         spikePoints=[]
         if minimum[0] < maximum[0]:
             minimum = minimum[1:]
@@ -438,8 +429,7 @@ class dataSample:
                 ampl = round(resultData[triplet[0]]-resultData[triplet[1]]+\
                        (resultData[triplet[2]]-resultData[triplet[0]])/\
                        (triplet[2]-triplet[0])*(triplet[1]-triplet[0]), 1)
-                if self.argDict["debug"]:
-                    print("spikeFinding # len(spikePoints): {0}, Spike: {1}, Ampl={2}, SD={3}".format(spikePointsLen, i, ampl, SD))
+                logger.warn("spikeFinding # len(spikePoints): {0}, Spike: {1}, Ampl={2}, SD={3}".format(spikePointsLen, i, ampl, SD))
                 if ampl > SD:
                     index = len(self.spikeDict)
                     self.spikeDict[index] = "n{0}".format(str(i))
@@ -459,9 +449,8 @@ class dataSample:
                     tmpObject.spikeLength = self.getSpikeLength(triplet[0], triplet[1], triplet[2]) * 1000.0 / self.frequency
                     tmpObject.spikeFront, tmpObject.spikeBack = self.getSpikeAngles(resultData[triplet[0]:triplet[2]])
             except:
-                print("spikeFinding # Error: {0}".format(sys.exc_info()))
-        if self.argDict["debug"]:
-            print("spikeFinding # Для файла {0} найдены спайки: {1}".format(self.fileName, self.spikeDict))
+                logger.error("spikeFinding # Error: {0}".format(sys.exc_info()))
+        logger.info("spikeFinding # Для файла {0} найдены спайки: {1}".format(self.fileName, self.spikeDict))
 
     ## Проверка что найдено: спайк или волоконный ответ
     #  Проверяем для первого спайка в каждой группе спайков является ли он
@@ -479,9 +468,9 @@ class dataSample:
                                      tmpObject2.spikeFront,
                                      tmpObject2.spikeBack) >= 0.5:
                 tmpObject2.fibre = 1
-                print("checkForFibrePotential # There are AP at zero position")
+                logger.warn("checkForFibrePotential # There are AP at zero position")
         except:
-            print("checkForFibrePotential # Error: {0}".format(sys.exc_info()))
+            logger.error("checkForFibrePotential # Error: {0}".format(sys.exc_info()))
 
     ## Интерактивный поиск волоконных ответов
     #
@@ -490,7 +479,7 @@ class dataSample:
     #
     def interactiveFibreSearch(self, respDictValue):
         try:
-            print("interactiveFibreSerach # Response dict values: {0}".format(self.responseDict.values()))
+            logger.info("interactiveFibreSerach # Response dict values: {0}".format(self.responseDict.values()))
             tmpObject = getattr(self, respDictValue)
             tmpObject2 = getattr(self, tmpObject.spikes[0])
             start = tmpObject2.spikeMax1 - (tmpObject2.spikeMin-tmpObject2.spikeMax1)
@@ -505,15 +494,14 @@ class dataSample:
             plt.show()
             try:
                 self.minimumsForFibre = []
-                if self.argDict["debug"]:
-                    print("interactiveFibreSerach # tmpObject.spikes: {0}".format(tmpObject.spikes))
+                logger.info("interactiveFibreSerach # tmpObject.spikes: {0}".format(tmpObject.spikes))
                 for j in tmpObject.spikes:
                     tmpObject2 = getattr(self, j)
                     ax.plot(tmpObject2.spikeMin, self.result[tmpObject2.spikeMin],'or')
                     ax.text(tmpObject2.spikeMin, self.result[tmpObject2.spikeMin]-15, str(j), fontsize = 12, va='bottom')
                     self.minimumsForFibre.append(tmpObject2.spikeMin)
             except:
-                print("interactiveFibreSerach # Error: {0}".format(sys.exc_info()))
+                logger.info("interactiveFibreSerach # Error: {0}".format(sys.exc_info()))
             self.fibreIndex=''
             cursor = Cursor(ax, useblit = True, color='black', linewidth = 2 )
             #_widgets=[cursor]
@@ -521,9 +509,9 @@ class dataSample:
             plt.show()
             del fig, ax # very important to stop memory leak
             if self.fibreIndex!='':
-                print("interactiveFibreSerach # Fibre spike: {0}".format(tmpObject.spikes[self.fibreIndex]))
+                logger.info("interactiveFibreSerach # Fibre spike: {0}".format(tmpObject.spikes[self.fibreIndex]))
             else:
-                print "interactiveFibreSerach # No fibre spikes selected"
+                logger.info("interactiveFibreSerach # No fibre spikes selected")
             fibre = tmpObject.spikes[self.fibreIndex]
             if not fibre:
                 pass
@@ -531,7 +519,7 @@ class dataSample:
                 tmpObject2 = getattr(self, fibre)
                 tmpObject2.fibre = 1
         except:
-            print("interactiveFibreSerach # Error wile ploating: {0}".format(sys.exc_info()))
+            logger.info("interactiveFibreSerach # Error wile ploating: {0}".format(sys.exc_info()))
 
     ## Обработка клика по графику во время интерактивного поиска волоконного ответа
     def click(self, event):
@@ -597,8 +585,7 @@ class dataSample:
                 firstPoint=(min1-max1)/2
                 secondPoint=(max2-min1)/2
         length=(secondPoint+(min1-(max1+firstPoint)))*2
-        if self.argDict["debug"]:
-            print("getSpikeLength # firstPoint: {0}, secondPoint: {1}, length {2}".format(firstPoint, secondPoint, length))
+        logger.info("getSpikeLength # firstPoint: {0}, secondPoint: {1}, length {2}".format(firstPoint, secondPoint, length))
         return length
 
     ## Определяем длинну группы спайков
@@ -609,8 +596,7 @@ class dataSample:
         responsMatrix = zeros((max(self.clusters), 2), dtype = int)#[[start1, stop1],[start2, stop2]]
         length = len(self.result)
         smallFrame = self.defaultFrame/10
-        if self.argDict["debug"]:
-            print("responsLength # len(unique(self.clusters)): {0}, len(self.clusters): {1}".format(len(unique(self.clusters)), len(self.clusters)))
+        logger.warn("responsLength # len(unique(self.clusters)): {0}, len(self.clusters): {1}".format(len(unique(self.clusters)), len(self.clusters)))
         for i in unique(self.clusters):
             try:
                 lastSpike = self.spikeDict.values()[list(self.clusters).index(i+1)-1]
@@ -626,8 +612,7 @@ class dataSample:
                 while((abs(self.result[k:k+smallFrame*4].mean()-baseLevel) > std2/4 or self.result[k:k+smallFrame*4].std() > std2/4) and (k < length-smallFrame*4 and k < self.stimuli[0][i])):
                     k += smallFrame
             except:
-                if self.argDict["debug"]:
-                    print "responsLength # finding end of last response:", sys.exc_info()
+                logger.warn("responsLength # finding end of last response")
                 k = lastMax
                 if k > length-smallFrame*4:
                     k = length-1
@@ -649,21 +634,18 @@ class dataSample:
                 if difference < 0:
                     while self.result[stop] > threshold:
                         stop -= 1
-                if self.argDict["debug"]:
-                    print("responsLength # lastMax: {0}, stop: {1}, length{2}".format(lastMax, stop, length))
+                logger.warn("responsLength # lastMax: {0}, stop: {1}, length{2}".format(lastMax, stop, length))
                 try:
                     """
                     Calculate response end precisely using polynomial smoothing
                     """
                     sampleLen = stop-lastMax
-                    if self.argDict["debug"]:
-                        print("responsLength # End sample length: {0}".format(sampleLen))
+                    logger.warn("responsLength # End sample length: {0}".format(sampleLen))
                     if sampleLen > 0:
                         arFit = polyfit(array(range(sampleLen)), self.result[lastMax:stop], 2)
                         sample = polyval(arFit, array(range(sampleLen)))
                         extrem = where(diff(sample)==0)[0]
-                        if self.argDict["debug"]:
-                            print("responsLength # number of extremums in respons length curve: {0}".format(len(extrem)))
+                        logger.warn("responsLength # number of extremums in respons length curve: {0}".format(len(extrem)))
                         if len(extrem) > 0:
                             lastExtremum = extrem[-1]
                             if sample[lastExtremum] > sample[lastExtremum+1]:
@@ -684,7 +666,7 @@ class dataSample:
                         responsMatrix[i-1] = start, stop
                 except:
                     responsMatrix[i-1] = start, stop
-                    print("responsLength # Error: {0}".format(sys.exc_info()))
+                    logger.error("responsLength # Error: {0}".format(sys.exc_info()))
         return responsMatrix
 
     def responsAnalysis(self):
@@ -738,24 +720,24 @@ class dataSample:
                     tmpObject.responsNumber = i
                     tmpObject.epsp = round(tmpObject.response_top-tmpObject.baselevel, 1)
                 except:
-                    print "Unexpected error wile fill response properties:", sys.exc_info()
+                    logger.error("Unexpected error wile fill response properties: {0}".format(sys.exc_info()))
                 try:
                     self.setSpikeDelays(tmpObject.spikes, tmpObject.responseStart)
                 except:
-                    print "Unexpected error wile setSpikeDelays:", sys.exc_info()
+                    logger.error("Unexpected error wile setSpikeDelays: {0}".format(sys.exc_info()))
                 if self.argDict["manual"]:
                     self.interactiveFibreSearch(self.responseDict[index])
                 else:
                     self.checkForFibrePotential(self.responseDict[index])
                 self.spikeNumberShift(tmpObject)
             except:
-                print "Unexpected error wile checkForFibrePotential:", sys.exc_info()
-        print(self.fileName.split('/')[-1], self.responseDict)
+                logger.error("Unexpected error wile checkForFibrePotential: {0}".format(sys.exc_info()))
+        logger.info(self.fileName.split('/')[-1], self.responseDict)
 
     def spikeNumberShift(self, tmpObject):
         tmpObject2 = getattr(self, tmpObject.spikes[0])
         if tmpObject2.spikeNumber==0 and tmpObject2.fibre!=1:
-            print("spike number shift")
+            logger.warn("spike number shift")
             for i in tmpObject.spikes:
                 tmpObject2 = getattr(self, i)
                 tmpObject2.spikeNumber += 1
@@ -770,7 +752,7 @@ class dataSample:
             try:
                 self.mysql_writer.dbWriteNumberOfResponses(len(self.responseDict.values()))
             except:
-                print "Unexpected error wile dbWriteNumberOfResponses:", sys.exc_info()
+                logger.error("Unexpected error wile dbWriteNumberOfResponses: {0}".format(sys.exc_info()))
             for i in self.responseDict.values():
                 tmpObject = getattr(self, i)
                 self.mysql_writer.dbWriteResponse(tmpObject)
@@ -780,5 +762,5 @@ class dataSample:
                         tmpObject2 = getattr(self, j)
                         self.mysql_writer.dbWriteSpike(tmpObject2)
                 except:
-                    print "Unexpected error wile dbWriteSpike:", sys.exc_info()
+                    logger.error("Unexpected error wile dbWriteSpike: {0}".format(sys.exc_info()))
             self.mysql_writer.dbCommit()

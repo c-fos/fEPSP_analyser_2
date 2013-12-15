@@ -1,0 +1,944 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
+<title>fEPSP_analyser: Класс main.dbModel.StimProp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">fEPSP_analyser
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.5 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="namespaces.html"><span>Пакеты</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
+      <li><a href="inherits.html"><span>Иерархия&#160;классов</span></a></li>
+      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classmain_1_1db_model_1_1_stim_prop.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#pub-attribs">Открытые атрибуты</a> &#124;
+<a href="#pub-static-attribs">Статические открытые данные</a> &#124;
+<a href="classmain_1_1db_model_1_1_stim_prop-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс main.dbModel.StimProp</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Таблица для описания характеристик электрических стимулов( или шумов) Используется для обучения нейронной сети.  
+ <a href="classmain_1_1db_model_1_1_stim_prop.html#details">Подробнее...</a></p>
+<div class="dynheader">
+Граф наследования:main.dbModel.StimProp:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmain_1_1db_model_1_1_stim_prop__inherit__graph.png" border="0" usemap="#main_8db_model_8_stim_prop_inherit__map" alt="Inheritance graph"/></div>
+<map name="main_8db_model_8_stim_prop_inherit__map" id="main_8db_model_8_stim_prop_inherit__map">
+</map>
+</div>
+<div class="dynheader">
+Граф связей класса main.dbModel.StimProp:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmain_1_1db_model_1_1_stim_prop__coll__graph.png" border="0" usemap="#main_8db_model_8_stim_prop_coll__map" alt="Collaboration graph"/></div>
+<map name="main_8db_model_8_stim_prop_coll__map" id="main_8db_model_8_stim_prop_coll__map">
+</map>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:acaa9b791c1a40228dc0e3cfc9c9bf14b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#acaa9b791c1a40228dc0e3cfc9c9bf14b">__init__</a></td></tr>
+<tr class="separator:acaa9b791c1a40228dc0e3cfc9c9bf14b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Открытые атрибуты</h2></td></tr>
+<tr class="memitem:a198f8e009022e70c45a17ceaa9c7dcd6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a198f8e009022e70c45a17ceaa9c7dcd6">number</a></td></tr>
+<tr class="separator:a198f8e009022e70c45a17ceaa9c7dcd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab29aca8edeb4944cfd0e565190b88de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#aab29aca8edeb4944cfd0e565190b88de">length</a></td></tr>
+<tr class="separator:aab29aca8edeb4944cfd0e565190b88de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32fdad370a4a640057dac5b14faf1883"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a32fdad370a4a640057dac5b14faf1883">ptp_1</a></td></tr>
+<tr class="separator:a32fdad370a4a640057dac5b14faf1883"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d0b293e27019a8ca12abec145180d7c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a5d0b293e27019a8ca12abec145180d7c">ptp_2</a></td></tr>
+<tr class="separator:a5d0b293e27019a8ca12abec145180d7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f1358ce7a134a27cda3358e463c004f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a5f1358ce7a134a27cda3358e463c004f">std_1</a></td></tr>
+<tr class="separator:a5f1358ce7a134a27cda3358e463c004f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afee4694b5fc6b651996fc9864a597ffa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#afee4694b5fc6b651996fc9864a597ffa">std_2</a></td></tr>
+<tr class="separator:afee4694b5fc6b651996fc9864a597ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae680333090355784b7342210c20fcd26"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#ae680333090355784b7342210c20fcd26">median_1</a></td></tr>
+<tr class="separator:ae680333090355784b7342210c20fcd26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8707e85c7016b569fbffc3fb0b75b2b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#af8707e85c7016b569fbffc3fb0b75b2b">median_2</a></td></tr>
+<tr class="separator:af8707e85c7016b569fbffc3fb0b75b2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30c6c7e9cfcd3ea3ade8c1a6f138f647"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a30c6c7e9cfcd3ea3ade8c1a6f138f647">mean_1</a></td></tr>
+<tr class="separator:a30c6c7e9cfcd3ea3ade8c1a6f138f647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a6c3ea85e2d009fbadbfef97f0aa72b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a3a6c3ea85e2d009fbadbfef97f0aa72b">mean_2</a></td></tr>
+<tr class="separator:a3a6c3ea85e2d009fbadbfef97f0aa72b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e4cd8781deafa3edaa730f83ae768eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a5e4cd8781deafa3edaa730f83ae768eb">median_diff_1</a></td></tr>
+<tr class="separator:a5e4cd8781deafa3edaa730f83ae768eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7996bc8ab5841df30cb191fd54c72ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#ab7996bc8ab5841df30cb191fd54c72ac">median_diff_2</a></td></tr>
+<tr class="separator:ab7996bc8ab5841df30cb191fd54c72ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcdbacf42866032e39df18da49ef35ec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#adcdbacf42866032e39df18da49ef35ec">std_diff</a></td></tr>
+<tr class="separator:adcdbacf42866032e39df18da49ef35ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece055e039a4b1112f331d2b117a6d93"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#aece055e039a4b1112f331d2b117a6d93">ptp_diff</a></td></tr>
+<tr class="separator:aece055e039a4b1112f331d2b117a6d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36642c7b5cf5bbb2e9d7d81201b7d112"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a36642c7b5cf5bbb2e9d7d81201b7d112">stim</a></td></tr>
+<tr class="separator:a36642c7b5cf5bbb2e9d7d81201b7d112"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b9a14dcc3b31921f46878a59ea2e8af"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a3b9a14dcc3b31921f46878a59ea2e8af">auto</a></td></tr>
+<tr class="separator:a3b9a14dcc3b31921f46878a59ea2e8af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54ab31a3448935e24347b5af0349f274"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a54ab31a3448935e24347b5af0349f274">techInfo</a></td></tr>
+<tr class="separator:a54ab31a3448935e24347b5af0349f274"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Статические открытые данные</h2></td></tr>
+<tr class="memitem:a439fb0bc9175d686978e04003e5d9105"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a439fb0bc9175d686978e04003e5d9105">id</a> = Column(Integer, primary_key=True)</td></tr>
+<tr class="separator:a439fb0bc9175d686978e04003e5d9105"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae175244450f228affa32f23c6678d04c"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#ae175244450f228affa32f23c6678d04c">number</a> = Column(Integer)</td></tr>
+<tr class="separator:ae175244450f228affa32f23c6678d04c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab80c91c6789904ff0c72b867a4f0fd4a"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#ab80c91c6789904ff0c72b867a4f0fd4a">length</a> = Column(Float)</td></tr>
+<tr class="separator:ab80c91c6789904ff0c72b867a4f0fd4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dd472425008883f4e1b0be8f408844e"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a5dd472425008883f4e1b0be8f408844e">ptp_1</a> = Column(Float)</td></tr>
+<tr class="separator:a5dd472425008883f4e1b0be8f408844e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a680866e050e4454fe0983ba8b9ee1d73"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a680866e050e4454fe0983ba8b9ee1d73">ptp_2</a> = Column(Float)</td></tr>
+<tr class="separator:a680866e050e4454fe0983ba8b9ee1d73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad803ff34f35699ee009fffec9d6dfd1b"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#ad803ff34f35699ee009fffec9d6dfd1b">std_1</a> = Column(Float)</td></tr>
+<tr class="separator:ad803ff34f35699ee009fffec9d6dfd1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0acb4ade8aa51e20521e9bc5c828c524"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a0acb4ade8aa51e20521e9bc5c828c524">std_2</a> = Column(Float)</td></tr>
+<tr class="separator:a0acb4ade8aa51e20521e9bc5c828c524"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5ad86fcc244a35114b5dad576e099e4"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#ae5ad86fcc244a35114b5dad576e099e4">median_1</a> = Column(Float)</td></tr>
+<tr class="separator:ae5ad86fcc244a35114b5dad576e099e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9189a3ad3b4cf2788e2c3610479a86aa"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a9189a3ad3b4cf2788e2c3610479a86aa">median_2</a> = Column(Float)</td></tr>
+<tr class="separator:a9189a3ad3b4cf2788e2c3610479a86aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c1572e26667e60fcde4834b5eb011f9"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a5c1572e26667e60fcde4834b5eb011f9">mean_1</a> = Column(Float)</td></tr>
+<tr class="separator:a5c1572e26667e60fcde4834b5eb011f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10ee3b720b7dfd426cab883c6de3555c"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a10ee3b720b7dfd426cab883c6de3555c">mean_2</a> = Column(Float)</td></tr>
+<tr class="separator:a10ee3b720b7dfd426cab883c6de3555c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a869e56332a7d369494839ffdd8179678"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a869e56332a7d369494839ffdd8179678">median_diff_1</a> = Column(Float)</td></tr>
+<tr class="separator:a869e56332a7d369494839ffdd8179678"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d5b5cdd17f9464ab2a9d3959f666508"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a7d5b5cdd17f9464ab2a9d3959f666508">median_diff_2</a> = Column(Float)</td></tr>
+<tr class="separator:a7d5b5cdd17f9464ab2a9d3959f666508"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51e97ea4d16815bc3cde9bd90c1767de"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a51e97ea4d16815bc3cde9bd90c1767de">std_diff</a> = Column(Float)</td></tr>
+<tr class="separator:a51e97ea4d16815bc3cde9bd90c1767de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab78abc46aa7723c4526c560817330d3c"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#ab78abc46aa7723c4526c560817330d3c">ptp_diff</a> = Column(Float)</td></tr>
+<tr class="separator:ab78abc46aa7723c4526c560817330d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19b1d02c8e937cda713e5c70c9b54004"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a19b1d02c8e937cda713e5c70c9b54004">stim</a> = Column(Boolean)</td></tr>
+<tr class="separator:a19b1d02c8e937cda713e5c70c9b54004"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a027852b1610985279ec1fd2e6b30544e"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a027852b1610985279ec1fd2e6b30544e">auto</a> = Column(Boolean)</td></tr>
+<tr class="separator:a027852b1610985279ec1fd2e6b30544e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a506d59cdfee0403444514f78011b9c4c"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a506d59cdfee0403444514f78011b9c4c">techInfo</a> = Column(Integer, ForeignKey('techInfo.id'))</td></tr>
+<tr class="separator:a506d59cdfee0403444514f78011b9c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f833a5901b5bbd04c31b8d1b522ef9f"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html#a1f833a5901b5bbd04c31b8d1b522ef9f">techInfo_rel</a></td></tr>
+<tr class="separator:a1f833a5901b5bbd04c31b8d1b522ef9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Таблица для описания характеристик электрических стимулов( или шумов) Используется для обучения нейронной сети. </p>
+<p>данные хранятся в привязке к записи. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a class="anchor" id="acaa9b791c1a40228dc0e3cfc9c9bf14b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbModel.StimProp.__init__ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>number</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ptp_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ptp_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>std_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>std_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>median_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>median_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>mean_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>mean_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>median_diff_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>median_diff_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>std_diff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ptp_diff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>stim</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>auto</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>techInfo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Данные класса</h2>
+<a class="anchor" id="a027852b1610985279ec1fd2e6b30544e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.auto = Column(Boolean)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3b9a14dcc3b31921f46878a59ea2e8af"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.auto</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a439fb0bc9175d686978e04003e5d9105"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.id = Column(Integer, primary_key=True)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab80c91c6789904ff0c72b867a4f0fd4a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.length = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aab29aca8edeb4944cfd0e565190b88de"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.length</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5c1572e26667e60fcde4834b5eb011f9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.mean_1 = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a30c6c7e9cfcd3ea3ade8c1a6f138f647"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.mean_1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a10ee3b720b7dfd426cab883c6de3555c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.mean_2 = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3a6c3ea85e2d009fbadbfef97f0aa72b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.mean_2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae5ad86fcc244a35114b5dad576e099e4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.median_1 = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae680333090355784b7342210c20fcd26"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.median_1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9189a3ad3b4cf2788e2c3610479a86aa"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.median_2 = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af8707e85c7016b569fbffc3fb0b75b2b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.median_2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a869e56332a7d369494839ffdd8179678"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.median_diff_1 = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5e4cd8781deafa3edaa730f83ae768eb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.median_diff_1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7d5b5cdd17f9464ab2a9d3959f666508"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.median_diff_2 = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab7996bc8ab5841df30cb191fd54c72ac"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.median_diff_2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae175244450f228affa32f23c6678d04c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.number = Column(Integer)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a198f8e009022e70c45a17ceaa9c7dcd6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.number</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5dd472425008883f4e1b0be8f408844e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.ptp_1 = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a32fdad370a4a640057dac5b14faf1883"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.ptp_1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a680866e050e4454fe0983ba8b9ee1d73"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.ptp_2 = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5d0b293e27019a8ca12abec145180d7c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.ptp_2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab78abc46aa7723c4526c560817330d3c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.ptp_diff = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aece055e039a4b1112f331d2b117a6d93"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.ptp_diff</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad803ff34f35699ee009fffec9d6dfd1b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.std_1 = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5f1358ce7a134a27cda3358e463c004f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.std_1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0acb4ade8aa51e20521e9bc5c828c524"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.std_2 = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afee4694b5fc6b651996fc9864a597ffa"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.std_2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a51e97ea4d16815bc3cde9bd90c1767de"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.std_diff = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adcdbacf42866032e39df18da49ef35ec"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.std_diff</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a19b1d02c8e937cda713e5c70c9b54004"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.stim = Column(Boolean)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a36642c7b5cf5bbb2e9d7d81201b7d112"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.stim</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a506d59cdfee0403444514f78011b9c4c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.techInfo = Column(Integer, ForeignKey('techInfo.id'))</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a54ab31a3448935e24347b5af0349f274"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.StimProp.techInfo</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1f833a5901b5bbd04c31b8d1b522ef9f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.StimProp.techInfo_rel</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Инициализатор</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;= relationship(TechInfo, backref=backref(<span class="stringliteral">&quot;stimProp&quot;</span>,</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                                                          cascade=<span class="stringliteral">&quot;all, delete,all, delete-orphan&quot;</span>))</div>
+</div><!-- fragment -->
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>/home/pilat/git/fEPSP-analyser_new/main/<a class="el" href="db_model_8py.html">dbModel.py</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacemain.html">main</a></li><li class="navelem"><a class="el" href="namespacemain_1_1db_model.html">dbModel</a></li><li class="navelem"><a class="el" href="classmain_1_1db_model_1_1_stim_prop.html">StimProp</a></li>
+    <li class="footer">Документация по fEPSP_analyser. Последние изменения: Вс 15 Дек 2013 12:47:46. Создано системой
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
+  </ul>
+</div>
+</body>
+</html>

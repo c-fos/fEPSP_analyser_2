@@ -1,4 +1,0 @@
-<map id="main.dbAccess_lib.Mysql_writer.tagCheck" name="main.dbAccess_lib.Mysql_writer.tagCheck">
-<area shape="rect" id="node3" href="$classmain_1_1db_access__lib_1_1_mysql__writer.html#a6b006b96deff3431abe2659bdb2ac439" title="Запись в БД тегов эксперимента и связывание тегов с экспериментом " alt="" coords="239,5,415,51"/>
-<area shape="rect" id="node5" href="$classmain_1_1db_access__lib_1_1_mysql__writer.html#a3682bacec440542255c181d434e9568a" title="Сохранение тегов для этапов эксперимента и их связей с анализируемым файлом. " alt="" coords="229,74,424,121"/>
-</map>

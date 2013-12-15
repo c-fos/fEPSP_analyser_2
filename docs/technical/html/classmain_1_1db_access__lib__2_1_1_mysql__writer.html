@@ -1,0 +1,1461 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
+<title>fEPSP_analyser: Класс main.dbAccess_lib_2.Mysql_writer</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">fEPSP_analyser
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.5 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="namespaces.html"><span>Пакеты</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
+      <li><a href="inherits.html"><span>Иерархия&#160;классов</span></a></li>
+      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classmain_1_1db_access__lib__2_1_1_mysql__writer.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#pub-attribs">Открытые атрибуты</a> &#124;
+<a href="classmain_1_1db_access__lib__2_1_1_mysql__writer-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс main.dbAccess_lib_2.Mysql_writer</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Класс, в методах которого реализованны необходимые обращения к БД.  
+ <a href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#details">Подробнее...</a></p>
+<div class="dynheader">
+Граф связей класса main.dbAccess_lib_2.Mysql_writer:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmain_1_1db_access__lib__2_1_1_mysql__writer__coll__graph.png" border="0" usemap="#main_8db_access__lib__2_8_mysql__writer_coll__map" alt="Collaboration graph"/></div>
+<map name="main_8db_access__lib__2_8_mysql__writer_coll__map" id="main_8db_access__lib__2_8_mysql__writer_coll__map">
+</map>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a4c410ada7feaa0a74b36db0eb12a149a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a4c410ada7feaa0a74b36db0eb12a149a">__init__</a></td></tr>
+<tr class="memdesc:a4c410ada7feaa0a74b36db0eb12a149a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор  <a href="#a4c410ada7feaa0a74b36db0eb12a149a">Подробнее...</a><br/></td></tr>
+<tr class="separator:a4c410ada7feaa0a74b36db0eb12a149a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6e19a7227296495700bc6f1039bc952"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ad6e19a7227296495700bc6f1039bc952">loadExpInfo</a></td></tr>
+<tr class="memdesc:ad6e19a7227296495700bc6f1039bc952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Заполнение специфичных для эксперимента настроек  <a href="#ad6e19a7227296495700bc6f1039bc952">Подробнее...</a><br/></td></tr>
+<tr class="separator:ad6e19a7227296495700bc6f1039bc952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bfa56a4f192316feb9b6f9b410a7edf"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a4bfa56a4f192316feb9b6f9b410a7edf">tagWriter</a></td></tr>
+<tr class="memdesc:a4bfa56a4f192316feb9b6f9b410a7edf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Запись в БД тегов эксперимента и связывание тегов с экспериментом  <a href="#a4bfa56a4f192316feb9b6f9b410a7edf">Подробнее...</a><br/></td></tr>
+<tr class="separator:a4bfa56a4f192316feb9b6f9b410a7edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd3e5160e2a92fcad516a549c6bcfa9c"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#afd3e5160e2a92fcad516a549c6bcfa9c">tagCheck</a></td></tr>
+<tr class="memdesc:afd3e5160e2a92fcad516a549c6bcfa9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Функция возвращает id тэга, если такого тега нет, то предварительно создает его.  <a href="#afd3e5160e2a92fcad516a549c6bcfa9c">Подробнее...</a><br/></td></tr>
+<tr class="separator:afd3e5160e2a92fcad516a549c6bcfa9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac23718e5af650c89eda188b768916687"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ac23718e5af650c89eda188b768916687">variables_global</a></td></tr>
+<tr class="memdesc:ac23718e5af650c89eda188b768916687"><td class="mdescLeft">&#160;</td><td class="mdescRight">Загрузка настроек подключения к БД  <a href="#ac23718e5af650c89eda188b768916687">Подробнее...</a><br/></td></tr>
+<tr class="separator:ac23718e5af650c89eda188b768916687"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa554d67487e44df8fc341bdb1ef5a6b1"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#aa554d67487e44df8fc341bdb1ef5a6b1">variables_local</a></td></tr>
+<tr class="memdesc:aa554d67487e44df8fc341bdb1ef5a6b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Загрузка значений переменных для записи в БД проанализированной информации.  <a href="#aa554d67487e44df8fc341bdb1ef5a6b1">Подробнее...</a><br/></td></tr>
+<tr class="separator:aa554d67487e44df8fc341bdb1ef5a6b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f889879eb623e20dc3f712da7f0960b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a7f889879eb623e20dc3f712da7f0960b">dbConnect</a></td></tr>
+<tr class="memdesc:a7f889879eb623e20dc3f712da7f0960b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Подключение к БД.  <a href="#a7f889879eb623e20dc3f712da7f0960b">Подробнее...</a><br/></td></tr>
+<tr class="separator:a7f889879eb623e20dc3f712da7f0960b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb585d672d66c5a18a966287b2ca6515"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#abb585d672d66c5a18a966287b2ca6515">dbWriteExperiment</a></td></tr>
+<tr class="memdesc:abb585d672d66c5a18a966287b2ca6515"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохранение информации об эксперименте.  <a href="#abb585d672d66c5a18a966287b2ca6515">Подробнее...</a><br/></td></tr>
+<tr class="separator:abb585d672d66c5a18a966287b2ca6515"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5774b3e2384564b9bf2d2725061fcd40"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a5774b3e2384564b9bf2d2725061fcd40">dbWriteRecord</a></td></tr>
+<tr class="memdesc:a5774b3e2384564b9bf2d2725061fcd40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохранение информации об отдельной записи (один .dat файл)  <a href="#a5774b3e2384564b9bf2d2725061fcd40">Подробнее...</a><br/></td></tr>
+<tr class="separator:a5774b3e2384564b9bf2d2725061fcd40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a50c64e0b5b4804af06399e5c91ad5a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a5a50c64e0b5b4804af06399e5c91ad5a">addSource</a></td></tr>
+<tr class="memdesc:a5a50c64e0b5b4804af06399e5c91ad5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавление исходных данных в БД  <a href="#a5a50c64e0b5b4804af06399e5c91ad5a">Подробнее...</a><br/></td></tr>
+<tr class="separator:a5a50c64e0b5b4804af06399e5c91ad5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac62f3a44b0e84587d7c87dc3e803598a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ac62f3a44b0e84587d7c87dc3e803598a">getExpNames</a></td></tr>
+<tr class="memdesc:ac62f3a44b0e84587d7c87dc3e803598a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение полного списка проанализированных экспериментов.  <a href="#ac62f3a44b0e84587d7c87dc3e803598a">Подробнее...</a><br/></td></tr>
+<tr class="separator:ac62f3a44b0e84587d7c87dc3e803598a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0ca3cc8de6c3ebe28220348c178c22f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ae0ca3cc8de6c3ebe28220348c178c22f">getDataToExport</a></td></tr>
+<tr class="memdesc:ae0ca3cc8de6c3ebe28220348c178c22f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Получение таблицы с амплитудами спайков одного эксперимента для экспорта в файл  <a href="#ae0ca3cc8de6c3ebe28220348c178c22f">Подробнее...</a><br/></td></tr>
+<tr class="separator:ae0ca3cc8de6c3ebe28220348c178c22f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf136c64c0e701e4217eb6c186127075"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#aaf136c64c0e701e4217eb6c186127075">dbWriteRecordTags</a></td></tr>
+<tr class="memdesc:aaf136c64c0e701e4217eb6c186127075"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохранение тегов для этапов эксперимента и их связей с анализируемым файлом.  <a href="#aaf136c64c0e701e4217eb6c186127075">Подробнее...</a><br/></td></tr>
+<tr class="separator:aaf136c64c0e701e4217eb6c186127075"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8bd9e9d61f0ce85ffae661b9902f027"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#af8bd9e9d61f0ce85ffae661b9902f027">dbWriteResponse</a></td></tr>
+<tr class="memdesc:af8bd9e9d61f0ce85ffae661b9902f027"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохранение информации о группе спайков в ответ на одиночный стимул  <a href="#af8bd9e9d61f0ce85ffae661b9902f027">Подробнее...</a><br/></td></tr>
+<tr class="separator:af8bd9e9d61f0ce85ffae661b9902f027"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6d68b2b3f43f6744202b91433c5c3ce"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ab6d68b2b3f43f6744202b91433c5c3ce">dbWriteNumberOfResponses</a></td></tr>
+<tr class="memdesc:ab6d68b2b3f43f6744202b91433c5c3ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Обновляет информацию о количестве групп спайков в записи  <a href="#ab6d68b2b3f43f6744202b91433c5c3ce">Подробнее...</a><br/></td></tr>
+<tr class="separator:ab6d68b2b3f43f6744202b91433c5c3ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a160d22e1509b9e7b372dc8a5b1005164"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a160d22e1509b9e7b372dc8a5b1005164">dbWriteError</a></td></tr>
+<tr class="memdesc:a160d22e1509b9e7b372dc8a5b1005164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохранение служебной информации о характере обрабатываемого сигнала  <a href="#a160d22e1509b9e7b372dc8a5b1005164">Подробнее...</a><br/></td></tr>
+<tr class="separator:a160d22e1509b9e7b372dc8a5b1005164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92d2d166ff4eaa16e3e02ad755a04c17"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a92d2d166ff4eaa16e3e02ad755a04c17">dbWriteSpike</a></td></tr>
+<tr class="memdesc:a92d2d166ff4eaa16e3e02ad755a04c17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохранение информации о спайке  <a href="#a92d2d166ff4eaa16e3e02ad755a04c17">Подробнее...</a><br/></td></tr>
+<tr class="separator:a92d2d166ff4eaa16e3e02ad755a04c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bef2db4ce41a3c8cee5ef4bf749c206"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a8bef2db4ce41a3c8cee5ef4bf749c206">deleteExp</a></td></tr>
+<tr class="memdesc:a8bef2db4ce41a3c8cee5ef4bf749c206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Удаление эксперимента  <a href="#a8bef2db4ce41a3c8cee5ef4bf749c206">Подробнее...</a><br/></td></tr>
+<tr class="separator:a8bef2db4ce41a3c8cee5ef4bf749c206"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba9de3ce37d15da6822441c59878a7cb"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#aba9de3ce37d15da6822441c59878a7cb">dbCommit</a></td></tr>
+<tr class="memdesc:aba9de3ce37d15da6822441c59878a7cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сделать коммит в БД  <a href="#aba9de3ce37d15da6822441c59878a7cb">Подробнее...</a><br/></td></tr>
+<tr class="separator:aba9de3ce37d15da6822441c59878a7cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb1ffa53b4c2ca1349a7c344dc3afc92"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#aeb1ffa53b4c2ca1349a7c344dc3afc92">dbDisconnect</a></td></tr>
+<tr class="memdesc:aeb1ffa53b4c2ca1349a7c344dc3afc92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Отключение от БД  <a href="#aeb1ffa53b4c2ca1349a7c344dc3afc92">Подробнее...</a><br/></td></tr>
+<tr class="separator:aeb1ffa53b4c2ca1349a7c344dc3afc92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30386cc8e36f62d43130b5926fd06d62"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a30386cc8e36f62d43130b5926fd06d62">dbWriteTechInfo</a></td></tr>
+<tr class="memdesc:a30386cc8e36f62d43130b5926fd06d62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Создаем запись в которую по ходу алгоритма записываем значения переменных и коефициентов  <a href="#a30386cc8e36f62d43130b5926fd06d62">Подробнее...</a><br/></td></tr>
+<tr class="separator:a30386cc8e36f62d43130b5926fd06d62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a491cabf01493315d66a1c76904b06017"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a491cabf01493315d66a1c76904b06017">dbTechInfo_stim</a></td></tr>
+<tr class="memdesc:a491cabf01493315d66a1c76904b06017"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляем в техИнфо значения переменных для поиска стимулов  <a href="#a491cabf01493315d66a1c76904b06017">Подробнее...</a><br/></td></tr>
+<tr class="separator:a491cabf01493315d66a1c76904b06017"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0185cf17ed0e7618d22be07bfe076c28"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a0185cf17ed0e7618d22be07bfe076c28">dbTechInfo_level</a></td></tr>
+<tr class="memdesc:a0185cf17ed0e7618d22be07bfe076c28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляем в техИнфо значения главного уровня вейвлет разложения и характеристики сигнала до фильтрации  <a href="#a0185cf17ed0e7618d22be07bfe076c28">Подробнее...</a><br/></td></tr>
+<tr class="separator:a0185cf17ed0e7618d22be07bfe076c28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb4477ed5f3cb1ad26587f277856f542"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#aeb4477ed5f3cb1ad26587f277856f542">dbTechInfo_clean</a></td></tr>
+<tr class="memdesc:aeb4477ed5f3cb1ad26587f277856f542"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляем в техИнфо значения переменных для определения спайков  <a href="#aeb4477ed5f3cb1ad26587f277856f542">Подробнее...</a><br/></td></tr>
+<tr class="separator:aeb4477ed5f3cb1ad26587f277856f542"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace0e7d14e54abb9212efbbb5b935573a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ace0e7d14e54abb9212efbbb5b935573a">dbWaveLevel_write</a></td></tr>
+<tr class="memdesc:ace0e7d14e54abb9212efbbb5b935573a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Добавляем информацию о фильтрации уровня вейвлет разложения  <a href="#ace0e7d14e54abb9212efbbb5b935573a">Подробнее...</a><br/></td></tr>
+<tr class="separator:ace0e7d14e54abb9212efbbb5b935573a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2ad87ff665750a641eecde41930005e"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#af2ad87ff665750a641eecde41930005e">dbStimProp_write</a></td></tr>
+<tr class="memdesc:af2ad87ff665750a641eecde41930005e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Сохраняем информацию для поиска стимулов  <a href="#af2ad87ff665750a641eecde41930005e">Подробнее...</a><br/></td></tr>
+<tr class="separator:af2ad87ff665750a641eecde41930005e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Открытые атрибуты</h2></td></tr>
+<tr class="memitem:a9018a118de904fec765bca29a5304505"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a9018a118de904fec765bca29a5304505">rTagDict</a></td></tr>
+<tr class="separator:a9018a118de904fec765bca29a5304505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf60f664f7b1d678c87b4836ab796fa3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#adf60f664f7b1d678c87b4836ab796fa3">rTagMask</a></td></tr>
+<tr class="separator:adf60f664f7b1d678c87b4836ab796fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae231cc8e0a1c3a1c66bdb284ab7bb506"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ae231cc8e0a1c3a1c66bdb284ab7bb506">koef</a></td></tr>
+<tr class="separator:ae231cc8e0a1c3a1c66bdb284ab7bb506"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab652ec239bdc8106a575deff90a1921b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ab652ec239bdc8106a575deff90a1921b">responsNumber</a></td></tr>
+<tr class="separator:ab652ec239bdc8106a575deff90a1921b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3cff8bb67a4770e308c9e7efb57caf8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ae3cff8bb67a4770e308c9e7efb57caf8">filePath</a></td></tr>
+<tr class="separator:ae3cff8bb67a4770e308c9e7efb57caf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1868e311b628c2f24c0e9ed905f2a6a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ab1868e311b628c2f24c0e9ed905f2a6a">responslength</a></td></tr>
+<tr class="separator:ab1868e311b628c2f24c0e9ed905f2a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e1750c14a8797704158c75153f8bc0b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a0e1750c14a8797704158c75153f8bc0b">numberofspikes</a></td></tr>
+<tr class="separator:a0e1750c14a8797704158c75153f8bc0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5c13c6aad6c9d2c4703c0c5f3087985"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ac5c13c6aad6c9d2c4703c0c5f3087985">ampl</a></td></tr>
+<tr class="separator:ac5c13c6aad6c9d2c4703c0c5f3087985"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a613f1edf3088a42c7c43cde266699010"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a613f1edf3088a42c7c43cde266699010">number</a></td></tr>
+<tr class="separator:a613f1edf3088a42c7c43cde266699010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63e152590cf2737af2cb4e4ae3adbf28"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a63e152590cf2737af2cb4e4ae3adbf28">date</a></td></tr>
+<tr class="separator:a63e152590cf2737af2cb4e4ae3adbf28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e1b5e3ac5a34c9777c05e39a8f753bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a7e1b5e3ac5a34c9777c05e39a8f753bb">tagString</a></td></tr>
+<tr class="separator:a7e1b5e3ac5a34c9777c05e39a8f753bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8249c15511f799972ed5d48db2ad166"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ab8249c15511f799972ed5d48db2ad166">dbServerIp</a></td></tr>
+<tr class="separator:ab8249c15511f799972ed5d48db2ad166"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a525c4e1348fd5fe75ae158a5f6d5baf3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a525c4e1348fd5fe75ae158a5f6d5baf3">userName</a></td></tr>
+<tr class="separator:a525c4e1348fd5fe75ae158a5f6d5baf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9043a29b749ff02fd42861bacb315a4b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a9043a29b749ff02fd42861bacb315a4b">userPassword</a></td></tr>
+<tr class="separator:a9043a29b749ff02fd42861bacb315a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b91ee028b4d6e5184782f99f4e17852"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a5b91ee028b4d6e5184782f99f4e17852">dbName</a></td></tr>
+<tr class="separator:a5b91ee028b4d6e5184782f99f4e17852"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a350f3cf35bc1466aa918a992771d0dc2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a350f3cf35bc1466aa918a992771d0dc2">time</a></td></tr>
+<tr class="separator:a350f3cf35bc1466aa918a992771d0dc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad64c08339ba669b0539ea7122f9ec0e7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ad64c08339ba669b0539ea7122f9ec0e7">session</a></td></tr>
+<tr class="separator:ad64c08339ba669b0539ea7122f9ec0e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a108691948646d1eec20848b595b4776c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a108691948646d1eec20848b595b4776c">idExperiment</a></td></tr>
+<tr class="separator:a108691948646d1eec20848b595b4776c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af913212de02ff767de177b3bbef2a120"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#af913212de02ff767de177b3bbef2a120">idRecord</a></td></tr>
+<tr class="separator:af913212de02ff767de177b3bbef2a120"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd545e8c2946affd4f7c12f3a9f6dd00"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#abd545e8c2946affd4f7c12f3a9f6dd00">idResponse</a></td></tr>
+<tr class="separator:abd545e8c2946affd4f7c12f3a9f6dd00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4affe5aafe2fb52ef9f83567e8d8ea0a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a4affe5aafe2fb52ef9f83567e8d8ea0a">idTech</a></td></tr>
+<tr class="separator:a4affe5aafe2fb52ef9f83567e8d8ea0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Класс, в методах которого реализованны необходимые обращения к БД. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a class="anchor" id="a4c410ada7feaa0a74b36db0eb12a149a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.__init__ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Конструктор </p>
+<p>Загрузка настроек БД, подключение к БД, создание словарей тегов по которым следует различать файлы .dat, устанавливается коэффициент для перевода единиц АЦП в милливольты. </p>
+
+<p><div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmain_1_1db_access__lib__2_1_1_mysql__writer_a4c410ada7feaa0a74b36db0eb12a149a_cgraph.png" border="0" usemap="#classmain_1_1db_access__lib__2_1_1_mysql__writer_a4c410ada7feaa0a74b36db0eb12a149a_cgraph" alt=""/></div>
+<map name="classmain_1_1db_access__lib__2_1_1_mysql__writer_a4c410ada7feaa0a74b36db0eb12a149a_cgraph" id="classmain_1_1db_access__lib__2_1_1_mysql__writer_a4c410ada7feaa0a74b36db0eb12a149a_cgraph">
+<area shape="rect" id="node3" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ac23718e5af650c89eda188b768916687" title="Загрузка настроек подключения к БД " alt="" coords="245,5,437,51"/><area shape="rect" id="node5" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a7f889879eb623e20dc3f712da7f0960b" title="Подключение к БД. " alt="" coords="245,74,437,121"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a class="anchor" id="a5a50c64e0b5b4804af06399e5c91ad5a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.addSource </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>freq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавление исходных данных в БД </p>
+<p>в таблицу Record добавляем исходные данные: массив и частоту </p>
+
+</div>
+</div>
+<a class="anchor" id="aba9de3ce37d15da6822441c59878a7cb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbCommit </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сделать коммит в БД </p>
+
+</div>
+</div>
+<a class="anchor" id="a7f889879eb623e20dc3f712da7f0960b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbConnect </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Подключение к БД. </p>
+<p>Необходимые настройки получаем из предварительно заполненных реквизитов класса. </p>
+
+<p><div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmain_1_1db_access__lib__2_1_1_mysql__writer_a7f889879eb623e20dc3f712da7f0960b_icgraph.png" border="0" usemap="#classmain_1_1db_access__lib__2_1_1_mysql__writer_a7f889879eb623e20dc3f712da7f0960b_icgraph" alt=""/></div>
+<map name="classmain_1_1db_access__lib__2_1_1_mysql__writer_a7f889879eb623e20dc3f712da7f0960b_icgraph" id="classmain_1_1db_access__lib__2_1_1_mysql__writer_a7f889879eb623e20dc3f712da7f0960b_icgraph">
+<area shape="rect" id="node3" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a4c410ada7feaa0a74b36db0eb12a149a" title="Конструктор " alt="" coords="245,5,437,51"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="aeb1ffa53b4c2ca1349a7c344dc3afc92"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbDisconnect </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Отключение от БД </p>
+
+</div>
+</div>
+<a class="anchor" id="af2ad87ff665750a641eecde41930005e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbStimProp_write </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>number</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ptp_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ptp_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>std_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>std_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>median_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>median_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>mean_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>mean_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>median_diff_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>median_diff_2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>std_diff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ptp_diff</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>stim</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>auto</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сохраняем информацию для поиска стимулов </p>
+
+<p><div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmain_1_1db_access__lib__2_1_1_mysql__writer_af2ad87ff665750a641eecde41930005e_icgraph.png" border="0" usemap="#classmain_1_1db_access__lib__2_1_1_mysql__writer_af2ad87ff665750a641eecde41930005e_icgraph" alt=""/></div>
+<map name="classmain_1_1db_access__lib__2_1_1_mysql__writer_af2ad87ff665750a641eecde41930005e_icgraph" id="classmain_1_1db_access__lib__2_1_1_mysql__writer_af2ad87ff665750a641eecde41930005e_icgraph">
+<area shape="rect" id="node3" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#ace0e7d14e54abb9212efbbb5b935573a" title="Добавляем информацию о фильтрации уровня вейвлет разложения " alt="" coords="245,5,437,51"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="aeb4477ed5f3cb1ad26587f277856f542"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbTechInfo_clean </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>_std</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>SD</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавляем в техИнфо значения переменных для определения спайков </p>
+
+</div>
+</div>
+<a class="anchor" id="a0185cf17ed0e7618d22be07bfe076c28"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbTechInfo_level </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>_snr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>_ptp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>_std</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>mainLevel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавляем в техИнфо значения главного уровня вейвлет разложения и характеристики сигнала до фильтрации </p>
+
+</div>
+</div>
+<a class="anchor" id="a491cabf01493315d66a1c76904b06017"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbTechInfo_stim </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>p2s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>treshold</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавляем в техИнфо значения переменных для поиска стимулов </p>
+
+</div>
+</div>
+<a class="anchor" id="ace0e7d14e54abb9212efbbb5b935573a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbWaveLevel_write </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>smooth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>minSD</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>maxSD</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>smoothCoef</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Добавляем информацию о фильтрации уровня вейвлет разложения </p>
+
+<p><div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmain_1_1db_access__lib__2_1_1_mysql__writer_ace0e7d14e54abb9212efbbb5b935573a_cgraph.png" border="0" usemap="#classmain_1_1db_access__lib__2_1_1_mysql__writer_ace0e7d14e54abb9212efbbb5b935573a_cgraph" alt=""/></div>
+<map name="classmain_1_1db_access__lib__2_1_1_mysql__writer_ace0e7d14e54abb9212efbbb5b935573a_cgraph" id="classmain_1_1db_access__lib__2_1_1_mysql__writer_ace0e7d14e54abb9212efbbb5b935573a_cgraph">
+<area shape="rect" id="node3" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#af2ad87ff665750a641eecde41930005e" title="Сохраняем информацию для поиска стимулов " alt="" coords="245,5,437,51"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a160d22e1509b9e7b372dc8a5b1005164"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbWriteError </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>soft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>hard</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сохранение служебной информации о характере обрабатываемого сигнала </p>
+<p>Используется для развития алгоритма обработки. Следует расширить данную таблицу и сохранять в неё всю возможную информацию о проводимом анализе.</p>
+<p>def dbWriteSignalProperties(self, ptp_, snr_, std_, mainLevel): newSigProp = db.SignalProp(snr_, std_, ptp_, mainLevel, self.idRecord ) self.session.add(newSigProp) self.session.commit() Сохранение уровня возникшей в процессе выполнения анализа ошибки.</p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">soft</td><td>1 - была не критическая ошибка, иначе 0 </td></tr>
+    <tr><td class="paramname">hard</td><td>1 - была критическая ошибка, иначе 0 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="abb585d672d66c5a18a966287b2ca6515"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbWriteExperiment </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сохранение информации об эксперименте. </p>
+<p>Имя эксперимента получаем из имени папки содержащей обрабатываемый .dat файл. Дату с даты модификации первого попавшегося .dat файла в этой папке. </p>
+
+</div>
+</div>
+<a class="anchor" id="ab6d68b2b3f43f6744202b91433c5c3ce"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbWriteNumberOfResponses </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>number</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Обновляет информацию о количестве групп спайков в записи </p>
+<p>Запись об анализируемом файле создается еще до самого анализа, поэтому когда количество групп спайков определено, эта информация добавляется к записи о файле. </p>
+
+</div>
+</div>
+<a class="anchor" id="a5774b3e2384564b9bf2d2725061fcd40"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbWriteRecord </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сохранение информации об отдельной записи (один .dat файл) </p>
+<p>Сохраняется время модификации файла, имя файла, связь с экспериментом. В реквизит idRecord сохраняется id созданной записи. </p>
+
+</div>
+</div>
+<a class="anchor" id="aaf136c64c0e701e4217eb6c186127075"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbWriteRecordTags </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>filename</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сохранение тегов для этапов эксперимента и их связей с анализируемым файлом. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Имя анализируемого .dat файла. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="af8bd9e9d61f0ce85ffae661b9902f027"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbWriteResponse </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>tmpObject</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сохранение информации о группе спайков в ответ на одиночный стимул </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tmpObject</td><td>Экземпляр класса Response </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a92d2d166ff4eaa16e3e02ad755a04c17"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbWriteSpike </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>tmpObject</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Сохранение информации о спайке </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tmpObject</td><td>Экземпляр класса Spike </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a30386cc8e36f62d43130b5926fd06d62"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.dbWriteTechInfo </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>frame</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>stimDur</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Создаем запись в которую по ходу алгоритма записываем значения переменных и коефициентов </p>
+
+</div>
+</div>
+<a class="anchor" id="a8bef2db4ce41a3c8cee5ef4bf749c206"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.deleteExp </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>complete</em> = <code>True</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Удаление эксперимента </p>
+<p>Удаление эксперимента целиком или очистка ответов и спайков </p>
+
+</div>
+</div>
+<a class="anchor" id="ae0ca3cc8de6c3ebe28220348c178c22f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.getDataToExport </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>_idExp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>_spikeNum</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение таблицы с амплитудами спайков одного эксперимента для экспорта в файл </p>
+
+</div>
+</div>
+<a class="anchor" id="ac62f3a44b0e84587d7c87dc3e803598a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.getExpNames </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Получение полного списка проанализированных экспериментов. </p>
+<p>Возвращает список всех проанализированных экспериментов и их id </p>
+
+</div>
+</div>
+<a class="anchor" id="ad6e19a7227296495700bc6f1039bc952"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.loadExpInfo </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>filePath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>tagString</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Заполнение специфичных для эксперимента настроек </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>Путь к файлу .dat </td></tr>
+    <tr><td class="paramname">tagString</td><td>Строка с перечислением через запятую тэгов, которые экспериментатор указал во время запуска расчета. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="afd3e5160e2a92fcad516a549c6bcfa9c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.tagCheck </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>tag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>table</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Функция возвращает id тэга, если такого тега нет, то предварительно создает его. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>Тэг, строковый тип. </td></tr>
+    <tr><td class="paramname">table</td><td>Название таблицы с тегами </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p><div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmain_1_1db_access__lib__2_1_1_mysql__writer_afd3e5160e2a92fcad516a549c6bcfa9c_icgraph.png" border="0" usemap="#classmain_1_1db_access__lib__2_1_1_mysql__writer_afd3e5160e2a92fcad516a549c6bcfa9c_icgraph" alt=""/></div>
+<map name="classmain_1_1db_access__lib__2_1_1_mysql__writer_afd3e5160e2a92fcad516a549c6bcfa9c_icgraph" id="classmain_1_1db_access__lib__2_1_1_mysql__writer_afd3e5160e2a92fcad516a549c6bcfa9c_icgraph">
+<area shape="rect" id="node3" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a4bfa56a4f192316feb9b6f9b410a7edf" title="Запись в БД тегов эксперимента и связывание тегов с экспериментом " alt="" coords="245,5,437,51"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a4bfa56a4f192316feb9b6f9b410a7edf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.tagWriter </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Запись в БД тегов эксперимента и связывание тегов с экспериментом </p>
+
+<p><div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmain_1_1db_access__lib__2_1_1_mysql__writer_a4bfa56a4f192316feb9b6f9b410a7edf_cgraph.png" border="0" usemap="#classmain_1_1db_access__lib__2_1_1_mysql__writer_a4bfa56a4f192316feb9b6f9b410a7edf_cgraph" alt=""/></div>
+<map name="classmain_1_1db_access__lib__2_1_1_mysql__writer_a4bfa56a4f192316feb9b6f9b410a7edf_cgraph" id="classmain_1_1db_access__lib__2_1_1_mysql__writer_a4bfa56a4f192316feb9b6f9b410a7edf_cgraph">
+<area shape="rect" id="node3" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#afd3e5160e2a92fcad516a549c6bcfa9c" title="Функция возвращает id тэга, если такого тега нет, то предварительно создает его. " alt="" coords="245,5,437,51"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ac23718e5af650c89eda188b768916687"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.variables_global </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Загрузка настроек подключения к БД </p>
+<p>Из файла "dbConfig" загружаются адрес БД, имя ДБ, имя пользователя ДБ, пароль пользователя ДБ. Если файл не найден, загружается умолчательные значения. </p>
+
+<p><div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmain_1_1db_access__lib__2_1_1_mysql__writer_ac23718e5af650c89eda188b768916687_icgraph.png" border="0" usemap="#classmain_1_1db_access__lib__2_1_1_mysql__writer_ac23718e5af650c89eda188b768916687_icgraph" alt=""/></div>
+<map name="classmain_1_1db_access__lib__2_1_1_mysql__writer_ac23718e5af650c89eda188b768916687_icgraph" id="classmain_1_1db_access__lib__2_1_1_mysql__writer_ac23718e5af650c89eda188b768916687_icgraph">
+<area shape="rect" id="node3" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html#a4c410ada7feaa0a74b36db0eb12a149a" title="Конструктор " alt="" coords="245,5,437,51"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="aa554d67487e44df8fc341bdb1ef5a6b1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbAccess_lib_2.Mysql_writer.variables_local </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>tmpObject</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Загрузка значений переменных для записи в БД проанализированной информации. </p>
+<p>Осуществляется из реквизитов переданного процедуре объекта. Предполагается что объект - представитель класса ... </p>
+
+</div>
+</div>
+<h2 class="groupheader">Данные класса</h2>
+<a class="anchor" id="ac5c13c6aad6c9d2c4703c0c5f3087985"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.ampl</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a63e152590cf2737af2cb4e4ae3adbf28"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.date</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5b91ee028b4d6e5184782f99f4e17852"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.dbName</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab8249c15511f799972ed5d48db2ad166"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.dbServerIp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae3cff8bb67a4770e308c9e7efb57caf8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.filePath</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a108691948646d1eec20848b595b4776c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.idExperiment</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af913212de02ff767de177b3bbef2a120"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.idRecord</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abd545e8c2946affd4f7c12f3a9f6dd00"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.idResponse</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4affe5aafe2fb52ef9f83567e8d8ea0a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.idTech</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae231cc8e0a1c3a1c66bdb284ab7bb506"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.koef</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a613f1edf3088a42c7c43cde266699010"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.number</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0e1750c14a8797704158c75153f8bc0b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.numberofspikes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab1868e311b628c2f24c0e9ed905f2a6a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.responslength</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab652ec239bdc8106a575deff90a1921b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.responsNumber</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9018a118de904fec765bca29a5304505"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.rTagDict</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adf60f664f7b1d678c87b4836ab796fa3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.rTagMask</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad64c08339ba669b0539ea7122f9ec0e7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.session</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7e1b5e3ac5a34c9777c05e39a8f753bb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.tagString</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a350f3cf35bc1466aa918a992771d0dc2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.time</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a525c4e1348fd5fe75ae158a5f6d5baf3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.userName</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9043a29b749ff02fd42861bacb315a4b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbAccess_lib_2.Mysql_writer.userPassword</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>/home/pilat/git/fEPSP-analyser_new/main/<a class="el" href="db_access__lib__2_8py.html">dbAccess_lib_2.py</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacemain.html">main</a></li><li class="navelem"><a class="el" href="namespacemain_1_1db_access__lib__2.html">dbAccess_lib_2</a></li><li class="navelem"><a class="el" href="classmain_1_1db_access__lib__2_1_1_mysql__writer.html">Mysql_writer</a></li>
+    <li class="footer">Документация по fEPSP_analyser. Последние изменения: Вс 15 Дек 2013 12:47:46. Создано системой
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -13,6 +13,9 @@ Created on 13.11.2013
 import sys
 from numpy import arange, histogram, empty, unique, where, float16
 from scipy import signal
+import logging
+
+logger = logging.getLogger("workflow.array_processing")
 
 ## Функция возвращает наиболее часто встречающееся в массиве число.
 #
@@ -31,7 +34,7 @@ def histMean(sample):
         else:
             return uniqueValues
     except:
-        print("histMean # Error: {0}".format(sys.exc_info()))
+        logger.error("histMean # Error: {0}".format(sys.exc_info()))
 
 
 ## Формирует массив значений стандартного отклонения
@@ -59,16 +62,15 @@ def stdArray(sample,frame):
 #  @param data Входящий массив
 #  @param framesize размер рамки считывания
 #
-def getLocalPtp(data, framesize, debug):
+def getLocalPtp(data, framesize):
     ptpList=[]
     smoothedData=signal.medfilt(data, 5)
     smoothedDataLen=len(smoothedData)
-    if debug:
-        print("getLocalPtp function. data = {0}, len(data) = {1}, framesize = {2}".format(data, len(data), framesize))
+    logger.warn("getLocalPtp function. data = {0}, len(data) = {1}, framesize = {2}".format(data, len(data), framesize))
     try:
         ptpList=[i.ptp() for i in [smoothedData[j:j+framesize] for j in arange(0,smoothedDataLen-framesize,framesize/3)]]
     except:
-        print("Unexpected error in finding local ptp: {0}".format(sys.exc_info()))
+        logger.error("Unexpected error in finding local ptp: {0}".format(sys.exc_info()))
     if ptpList:
         return max(ptpList)
     else:
@@ -78,14 +80,12 @@ def getLocalPtp(data, framesize, debug):
 #
 #  Попытка оценить отношение сигнала к шуму.
 #
-def snrFinding(data,frameSize, debug):
-    if debug:
-        print("snrFinding function. Data = {0}, len(data) = {1}, framesize = {2}".format(data, len(data), frameSize))
-    minSD=stdFinder(data,frameSize, debug)
-    maxSD=getLocalPtp(data, frameSize*0.8, debug)
+def snrFinding(data,frameSize):
+    logger.warn("snrFinding function. Data = {0}, len(data) = {1}, framesize = {2}".format(data, len(data), frameSize))
+    minSD=stdFinder(data,frameSize)
+    maxSD=getLocalPtp(data, frameSize*0.8)
     snr=float16(maxSD/minSD)
-    if debug:
-        print("snrFinding function results: snr = {0}, maxSD = {1}, minSD = {2}".format(snr, maxSD, minSD))
+    logger.warn("snrFinding function results: snr = {0}, maxSD = {1}, minSD = {2}".format(snr, maxSD, minSD))
     return snr, maxSD, minSD
 
 ## Возвращает минимальное и максимальное локальные стандартные отклонения в массиве
@@ -95,7 +95,7 @@ def snrFinding(data,frameSize, debug):
 #  стандартное отклонение, максимальное стандартное отклонение, минимальное
 #  стандартное отклонение и среднее той рамки где std было минимальным.
 #
-def stdFinder(data, frameSize, debug, mean=False,maxStd=False):
+def stdFinder(data, frameSize, mean=False,maxStd=False):
     dataSample=[]
     minSD=200
     maxSD=0
@@ -115,8 +115,7 @@ def stdFinder(data, frameSize, debug, mean=False,maxStd=False):
             return minSD,dataSample[index][2]
         else:
             if maxStd==True:
-                if debug:
-                    print((maxSD,len(dataSample)))
+                logger.warn((maxSD,len(dataSample)))
                 return maxSD
             else:
                 return minSD

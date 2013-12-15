@@ -1,0 +1,4 @@
+<map id="main.fEPSP_gui.MyForm.fEPSP_start" name="main.fEPSP_gui.MyForm.fEPSP_start">
+<area shape="rect" id="node3" href="$namespacemain_1_1work_flow__lib.html#a09da814a9abc65c4d3ab4db5955557ea" title="Функция определяющая алгоритм обработки на уровне эксперимента " alt="" coords="272,13,469,43"/>
+<area shape="rect" id="node5" href="$namespacemain_1_1work_flow__lib.html#a70d6515d769d4183003c2f001e648cb7" title="Функция копирования файлов с ошибками в отдельные каталоги для дальнейшего анализа ..." alt="" coords="519,13,756,43"/>
+</map>

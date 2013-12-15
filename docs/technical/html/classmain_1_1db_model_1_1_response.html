@@ -1,0 +1,565 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
+<title>fEPSP_analyser: Класс main.dbModel.Response</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">fEPSP_analyser
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.5 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="namespaces.html"><span>Пакеты</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li><a href="classes.html"><span>Алфавитный&#160;указатель&#160;классов</span></a></li>
+      <li><a href="inherits.html"><span>Иерархия&#160;классов</span></a></li>
+      <li><a href="functions.html"><span>Члены&#160;классов</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('classmain_1_1db_model_1_1_response.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Указатель</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Классы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Пространства имен</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Файлы</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Функции</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Переменные</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#pub-attribs">Открытые атрибуты</a> &#124;
+<a href="#pub-static-attribs">Статические открытые данные</a> &#124;
+<a href="classmain_1_1db_model_1_1_response-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс main.dbModel.Response</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Таблица для описания группы спайков в ответ на один стимул  
+ <a href="classmain_1_1db_model_1_1_response.html#details">Подробнее...</a></p>
+<div class="dynheader">
+Граф наследования:main.dbModel.Response:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmain_1_1db_model_1_1_response__inherit__graph.png" border="0" usemap="#main_8db_model_8_response_inherit__map" alt="Inheritance graph"/></div>
+<map name="main_8db_model_8_response_inherit__map" id="main_8db_model_8_response_inherit__map">
+</map>
+</div>
+<div class="dynheader">
+Граф связей класса main.dbModel.Response:</div>
+<div class="dyncontent">
+<div class="center"><img src="classmain_1_1db_model_1_1_response__coll__graph.png" border="0" usemap="#main_8db_model_8_response_coll__map" alt="Collaboration graph"/></div>
+<map name="main_8db_model_8_response_coll__map" id="main_8db_model_8_response_coll__map">
+</map>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:afbcdb19467d1d6e16ebd2a29b1101358"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#afbcdb19467d1d6e16ebd2a29b1101358">__init__</a></td></tr>
+<tr class="separator:afbcdb19467d1d6e16ebd2a29b1101358"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Открытые атрибуты</h2></td></tr>
+<tr class="memitem:adb441ad5db85a6a97a9722a8cb9def38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#adb441ad5db85a6a97a9722a8cb9def38">record</a></td></tr>
+<tr class="separator:adb441ad5db85a6a97a9722a8cb9def38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1764e75f3836d7b9804e902eda82551"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#ae1764e75f3836d7b9804e902eda82551">number</a></td></tr>
+<tr class="separator:ae1764e75f3836d7b9804e902eda82551"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0131a905993bf156c0fdcdf34ea50cff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#a0131a905993bf156c0fdcdf34ea50cff">numberofspikes</a></td></tr>
+<tr class="separator:a0131a905993bf156c0fdcdf34ea50cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dc82ff4279501cba6366a15875b07ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#a3dc82ff4279501cba6366a15875b07ab">length</a></td></tr>
+<tr class="separator:a3dc82ff4279501cba6366a15875b07ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c29856b7e5156ec4c6f2d6cd44554b9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#a5c29856b7e5156ec4c6f2d6cd44554b9">epsp</a></td></tr>
+<tr class="separator:a5c29856b7e5156ec4c6f2d6cd44554b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bbe60496d3069fdaa1552035264996e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#a8bbe60496d3069fdaa1552035264996e">epspFront</a></td></tr>
+<tr class="separator:a8bbe60496d3069fdaa1552035264996e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18e2c78c2bbf6fa291c48cda3f014f11"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#a18e2c78c2bbf6fa291c48cda3f014f11">epspBack</a></td></tr>
+<tr class="separator:a18e2c78c2bbf6fa291c48cda3f014f11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4643e79260b576de47e0b353f6446ff5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#a4643e79260b576de47e0b353f6446ff5">epileptStd</a></td></tr>
+<tr class="separator:a4643e79260b576de47e0b353f6446ff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Статические открытые данные</h2></td></tr>
+<tr class="memitem:acdea05980c53384e6ecf3889906dcc6d"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#acdea05980c53384e6ecf3889906dcc6d">id</a> = Column(Integer, primary_key=True)</td></tr>
+<tr class="separator:acdea05980c53384e6ecf3889906dcc6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a091241f897da92cd4dc26b5280db3a18"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#a091241f897da92cd4dc26b5280db3a18">record</a> = Column(Integer, ForeignKey('record.id'))</td></tr>
+<tr class="separator:a091241f897da92cd4dc26b5280db3a18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab68182fe63e904b9f69573714e543ba4"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#ab68182fe63e904b9f69573714e543ba4">record_rel</a></td></tr>
+<tr class="separator:ab68182fe63e904b9f69573714e543ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44820a1d5c3d28dd28fcc972695961d6"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#a44820a1d5c3d28dd28fcc972695961d6">number</a> = Column(Integer)</td></tr>
+<tr class="separator:a44820a1d5c3d28dd28fcc972695961d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfc349ea80bb415d3e9255a987b2588c"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#acfc349ea80bb415d3e9255a987b2588c">numberofspikes</a> = Column(Integer)</td></tr>
+<tr class="separator:acfc349ea80bb415d3e9255a987b2588c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12d66ab7404fb05b6cc063b7fbe3ccc1"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#a12d66ab7404fb05b6cc063b7fbe3ccc1">length</a> = Column(Float)</td></tr>
+<tr class="separator:a12d66ab7404fb05b6cc063b7fbe3ccc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88b712a57fecef26149a85021ef82374"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#a88b712a57fecef26149a85021ef82374">epsp</a> = Column(Float)</td></tr>
+<tr class="separator:a88b712a57fecef26149a85021ef82374"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39b73efe5b7842ed741dfcca0d210480"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#a39b73efe5b7842ed741dfcca0d210480">epspFront</a> = Column(Float)</td></tr>
+<tr class="separator:a39b73efe5b7842ed741dfcca0d210480"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8a9a25b9082559da0e5b3032e7cf2c0"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#af8a9a25b9082559da0e5b3032e7cf2c0">epspBack</a> = Column(Float)</td></tr>
+<tr class="separator:af8a9a25b9082559da0e5b3032e7cf2c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9d12f08c4f487490d41818669d9a186"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmain_1_1db_model_1_1_response.html#ac9d12f08c4f487490d41818669d9a186">epileptStd</a> = Column(Float)</td></tr>
+<tr class="separator:ac9d12f08c4f487490d41818669d9a186"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Таблица для описания группы спайков в ответ на один стимул </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a class="anchor" id="afbcdb19467d1d6e16ebd2a29b1101358"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.dbModel.Response.__init__ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>record</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>number</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>numofspikes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>epsp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>epspFront</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>epspBack</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>epilept</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Данные класса</h2>
+<a class="anchor" id="ac9d12f08c4f487490d41818669d9a186"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.Response.epileptStd = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4643e79260b576de47e0b353f6446ff5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.Response.epileptStd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a88b712a57fecef26149a85021ef82374"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.Response.epsp = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5c29856b7e5156ec4c6f2d6cd44554b9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.Response.epsp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af8a9a25b9082559da0e5b3032e7cf2c0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.Response.epspBack = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a18e2c78c2bbf6fa291c48cda3f014f11"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.Response.epspBack</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a39b73efe5b7842ed741dfcca0d210480"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.Response.epspFront = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8bbe60496d3069fdaa1552035264996e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.Response.epspFront</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acdea05980c53384e6ecf3889906dcc6d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.Response.id = Column(Integer, primary_key=True)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a12d66ab7404fb05b6cc063b7fbe3ccc1"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.Response.length = Column(Float)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3dc82ff4279501cba6366a15875b07ab"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.Response.length</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a44820a1d5c3d28dd28fcc972695961d6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.Response.number = Column(Integer)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae1764e75f3836d7b9804e902eda82551"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.Response.number</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acfc349ea80bb415d3e9255a987b2588c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.Response.numberofspikes = Column(Integer)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0131a905993bf156c0fdcdf34ea50cff"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.Response.numberofspikes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a091241f897da92cd4dc26b5280db3a18"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.Response.record = Column(Integer, ForeignKey('record.id'))</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adb441ad5db85a6a97a9722a8cb9def38"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">main.dbModel.Response.record</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab68182fe63e904b9f69573714e543ba4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple main.dbModel.Response.record_rel</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Инициализатор</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;= relationship(Record, backref=backref(<span class="stringliteral">&quot;response&quot;</span>,</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                                                      cascade=<span class="stringliteral">&quot;all, delete,all, delete-orphan&quot;</span>))</div>
+</div><!-- fragment -->
+</div>
+</div>
+<hr/>Объявления и описания членов класса находятся в файле:<ul>
+<li>/home/pilat/git/fEPSP-analyser_new/main/<a class="el" href="db_model_8py.html">dbModel.py</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacemain.html">main</a></li><li class="navelem"><a class="el" href="namespacemain_1_1db_model.html">dbModel</a></li><li class="navelem"><a class="el" href="classmain_1_1db_model_1_1_response.html">Response</a></li>
+    <li class="footer">Документация по fEPSP_analyser. Последние изменения: Вс 15 Дек 2013 12:47:46. Создано системой
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
+  </ul>
+</div>
+</body>
+</html>

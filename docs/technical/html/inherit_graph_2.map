@@ -1,0 +1,11 @@
+<map id="Иерархия классов. Графический вид." name="Иерархия классов. Графический вид.">
+<area shape="rect" id="node3" href="$classmain_1_1db_model_1_1_experiment.html" title="Таблица для описания эксперимента " alt="" coords="111,5,292,35"/>
+<area shape="rect" id="node5" href="$classmain_1_1db_model_1_1exp_tag.html" title="Таблица тэгов для описания эксперимента " alt="" coords="121,59,281,88"/>
+<area shape="rect" id="node7" href="$classmain_1_1db_model_1_1_record.html" title="Таблица для описания записи " alt="" coords="123,112,280,141"/>
+<area shape="rect" id="node9" href="$classmain_1_1db_model_1_1rec_tag.html" title="Таблица тэгов для описания записи " alt="" coords="123,165,280,195"/>
+<area shape="rect" id="node11" href="$classmain_1_1db_model_1_1_response.html" title="Таблица для описания группы спайков в ответ на один стимул " alt="" coords="113,219,289,248"/>
+<area shape="rect" id="node13" href="$classmain_1_1db_model_1_1_spike.html" title="Таблица для описания отдельного спайка " alt="" coords="128,272,275,301"/>
+<area shape="rect" id="node15" href="$classmain_1_1db_model_1_1_stim_prop.html" title="Таблица для описания характеристик электрических стимулов( или шумов) Используется для обучения нейро..." alt="" coords="117,325,285,355"/>
+<area shape="rect" id="node17" href="$classmain_1_1db_model_1_1_tech_info.html" title="Таблица для описания служебной ниформации использованой при анализе " alt="" coords="117,379,285,408"/>
+<area shape="rect" id="node19" href="$classmain_1_1db_model_1_1_wave_level.html" title="Таблица для описания характеристик фильтров отдельных уровней вейвлет разложения " alt="" coords="111,432,292,461"/>
+</map>

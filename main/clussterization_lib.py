@@ -20,6 +20,9 @@ Created on 15.02.2012
 
 from numpy import array, where, zeros
 import sys
+import logging
+
+logger = logging.getLogger("clussterization_lib")
 
 def clusterization(fromObject, spikeDict, stimuli):
     if len(spikeDict) > 1:
@@ -46,4 +49,4 @@ def clusterAnalyser(fromObject, spikeDict, clusters):
             k = where(clusters == int(clusters[i]))[0][0]
             tmpObject.spikeNumber = int(i)-k
         except:
-            print("clusterAnalyser # Error: {0}".format(sys.exc_info()))
+            logger.error("clusterAnalyser # Error: {0}".format(sys.exc_info()))

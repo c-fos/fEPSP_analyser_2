@@ -32,24 +32,45 @@ from glob import glob
 import sys
 from dbAccess_lib_2 import Mysql_writer
 from analyser_lib import dataSample
-import shutil
+import shutil, logging
+
 
 ## Функция определяющая алгоритм обработки на уровне эксперимента
 def workFlow(argDict):
-    print(argDict)
+    logging.basicConfig(filename='fEPSP.log', filemode='w', level=logging.DEBUG)
+    logger = logging.getLogger("workflow")
+    logger.setLevel(logging.DEBUG)
+    # create file handler which logs even debug messages
+    fh = logging.FileHandler('fEPSP.log')
+    fh.setLevel(logging.DEBUG)
+    # create console handler with a higher log level
+    ch = logging.StreamHandler()
+    if argDict["debug"]:
+        ch.setLevel(logging.DEBUG)
+    else:
+        ch.setLevel(logging.ERROR)
+    # create formatter and add it to the handlers
+    formatter = logging.Formatter('%(levelname)s - %(name)s - %(message)s')
+    fh.setFormatter(formatter)
+    ch.setFormatter(formatter)
+    # add the handlers to the logger
+    logger.addHandler(fh)
+    logger.addHandler(ch)
+
+    logger.info(argDict)
     dirPath = argDict["input"]
     fileList = glob(dirPath+"/*.dat")
     if not fileList:
-        print("There are no *.dat files in the directory! Exit!")
+        logger.warn("There are no *.dat files in the directory! Exit!")
         sys.exit(1)
     if argDict["write"]:
         mysql_writer = Mysql_writer()
         mysql_writer.loadExpInfo(fileList[0], argDict["tags"])
-        print("write to database enabled")
+        logger.info("Write to database enabled")
         mysql_writer.dbWriteExperiment()
         mysql_writer.tagWriter()
     else:
-        print("write to database doesn`t enabled")
+        logger.info("Write to database doesn`t enabled")
         mysql_writer="pass"
     for i in fileList:
         fileName = i.split('/')[-1]
@@ -63,14 +84,14 @@ def workFlow(argDict):
             dataSample1 = dataSample(i, mysql_writer, argDict)
             dataSample1.dataProcessing()
             if dataSample1.hardError==1:
-                errorProcessing(i, "hard")
+                errorProcessing(i, "hard", logger)
             elif dataSample1.softError==1:
-                errorProcessing(i, "soft")
+                errorProcessing(i, "soft", logger)
             else:
                 pass
             del dataSample1
         except:
-            print("WorkFlow # Error: {0}".format(sys.exc_info()))
+            logger.error("Error: {0}".format(sys.exc_info()))
             try:
                 del dataSample1
             except:
@@ -79,16 +100,16 @@ def workFlow(argDict):
         try:
             mysql_writer.dbDisconnect()
         except:
-            print("Unexpected error in dbDisconect:", sys.exc_info())
+            logger.error("Unexpected error in dbDisconect: {0}".format(sys.exc_info()))
 
 ## Функция копирования файлов с ошибками в отдельные каталоги для дальнейшего анализа
-def errorProcessing(filename, errorType):
+def errorProcessing(filename, errorType, logger):
     try:
-        print("copy file with trouble to separate directory")
+        logger.info("copy file with trouble to separate directory")
         if errorType=="soft":
             shutil.copy2(filename,"./softErrors/")
         else:
             shutil.copy2(filename,"./hardErrors/")
     except:
-        print("Unexpected error during copy:", sys.exc_info())
+        logger.error("Can`t copy files with errors: {0}".format(sys.exc_info()))
         raise
