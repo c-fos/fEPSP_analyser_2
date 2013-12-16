@@ -1,19 +1,23 @@
 var NAVTREEINDEX0 =
 {
 "____init_____8py.html":[2,0,0,0],
+"____init_____8py_source.html":[2,0,0,0],
 "_in_out__lib_8py.html":[2,0,0,10],
 "_in_out__lib_8py.html#a0ff8e8d8634132ae6421ade867032be1":[2,0,0,10,4],
 "_in_out__lib_8py.html#a2a4b7d7995889847aef0250acc99b3e4":[2,0,0,10,1],
 "_in_out__lib_8py.html#a6a09bc8bcfea84fcfb92f3905ff55ec6":[2,0,0,10,2],
 "_in_out__lib_8py.html#ad45d28a0c1fff3af08c45452f9c22be7":[2,0,0,10,3],
 "_in_out__lib_8py.html#ae381b1abe9ee06da02711e991a57d220":[2,0,0,10,0],
+"_in_out__lib_8py_source.html":[2,0,0,10],
 "analyser__lib_8py.html":[2,0,0,1],
 "analyser__lib_8py.html#a4b6bce86d0904c6e31f6e1b1ffc8745e":[2,0,0,1,1],
+"analyser__lib_8py_source.html":[2,0,0,1],
 "annotated.html":[1,0],
 "array__prepare_8py.html":[2,0,0,2],
 "array__prepare_8py.html#a1b891ad1d653d35a16bbdfd799057244":[2,0,0,2,1],
 "array__prepare_8py.html#a4b70a10d97b2ef06695c613ae6527f36":[2,0,0,2,2],
 "array__prepare_8py.html#a8b238f75b75b9ed9ac63cf54f89d8573":[2,0,0,2,0],
+"array__prepare_8py_source.html":[2,0,0,2],
 "array__processing__functions_8py.html":[2,0,0,3],
 "array__processing__functions_8py.html#a4af4f4d74942a18d26a795c11fc23598":[2,0,0,3,3],
 "array__processing__functions_8py.html#a5e22adcd0c398dfcf1abde9c03f6f09a":[2,0,0,3,5],
@@ -21,6 +25,7 @@ var NAVTREEINDEX0 =
 "array__processing__functions_8py.html#aa3a1a210912aff50398274b3d67e5a5e":[2,0,0,3,2],
 "array__processing__functions_8py.html#ad0acf74b02e5aad3ad6bf0018b6c9368":[2,0,0,3,1],
 "array__processing__functions_8py.html#ae32ed9f56cd298154cf57dc0d5512bd6":[2,0,0,3,0],
+"array__processing__functions_8py_source.html":[2,0,0,3],
 "classes.html":[1,1],
 "classmain_1_1analyser__lib_1_1data_sample.html":[1,0,6,0,0],
 "classmain_1_1analyser__lib_1_1data_sample.html#a066db7ef12c621aa26e15c406a9fda55":[1,0,6,0,0,37],
@@ -244,10 +249,5 @@ var NAVTREEINDEX0 =
 "classmain_1_1objects__lib_1_1_spike.html#aa157731db95ae300b323eb8d90bca212":[1,0,6,10,0,17],
 "classmain_1_1objects__lib_1_1_spike.html#aa7b0b6d3a467e3d15c89aa698ae7950a":[1,0,6,10,0,7],
 "classmain_1_1objects__lib_1_1_spike.html#aadd26806bec52b1c2e02c692d3e91c8b":[1,0,6,10,0,13],
-"classmain_1_1objects__lib_1_1_spike.html#ab2a9e98bbc1d75d3bb3b6a51163ac3a0":[1,0,6,10,0,2],
-"classmain_1_1objects__lib_1_1_spike.html#adb235c1830eaaf58ee905fd6bca00914":[1,0,6,10,0,0],
-"classmain_1_1objects__lib_1_1_spike.html#aef4d9a9e774865d11e1d0aa58869754e":[1,0,6,10,0,6],
-"classmain_1_1objects__lib_1_1_spike.html#af17a4ee0a5656cc1d5232b93bd265a53":[1,0,6,10,0,18],
-"classmain_1_1objects__lib_1_1_spike.html#afaebdfae2f1b2b6cb6d4a62bd80e71dc":[1,0,6,10,0,10],
-"classmain_1_1simple_1_1_ui___main_window.html":[1,0,6,12,0]
+"classmain_1_1objects__lib_1_1_spike.html#ab2a9e98bbc1d75d3bb3b6a51163ac3a0":[1,0,6,10,0,2]
 };
