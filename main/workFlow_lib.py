@@ -64,7 +64,7 @@ def workFlow(argDict):
         logger.warn("There are no *.dat files in the directory! Exit!")
         sys.exit(1)
     if argDict["write"]:
-        mysql_writer = Mysql_writer()
+        mysql_writer = Mysql_writer(argDict["dbConf"]["dbType"], argDict["dbConf"]["dbUser"], argDict["dbConf"]["dbPass"], argDict["dbConf"]["dbAdress"], argDict["dbConf"]["dbScheme"])
         mysql_writer.loadExpInfo(fileList[0], argDict["tags"])
         logger.info("Write to database enabled")
         mysql_writer.dbWriteExperiment()

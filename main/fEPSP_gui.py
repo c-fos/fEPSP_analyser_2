@@ -17,7 +17,7 @@ class MyForm(QtGui.QMainWindow):
         QtGui.QWidget.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.db = Mysql_writer()
+        self.db = Mysql_writer("mysql", self.ui.dbUserLine.text(), self.ui.dbPassLine.text(), self.ui.dbServerIpLine.text(), self.ui.dbNameLine.text())
         self.fsmodel = QtGui.QFileSystemModel()
         self.stmodel = QtGui.QStandardItemModel()
         self.root_index = self.fsmodel.setRootPath(self.ui.pathLine.text())
@@ -93,7 +93,12 @@ class MyForm(QtGui.QMainWindow):
                    ,"write":write
                    ,"tags":substance
                    ,"manual":manual
-                   ,"debug":debug}
+                   ,"debug":debug
+                   ,"dbConf":{"dbType":"mysql"
+                             ,"dbUser":self.ui.dbUserLine.text()
+                             ,"dbPass":self.ui.dbPassLine.text()
+                             ,"dbAdress":self.ui.dbServerIpLine.text()
+                             ,"dbScheme":self.ui.dbNameLine.text()}}
         if debug=="1":
             print(argDict)
         workFlow(argDict)

@@ -14,11 +14,10 @@ from sqlalchemy.orm import relationship, backref
 
 ## Определяем необходимые глобальные переменные
 Base = declarative_base()
-## Настраиваем подключение к БД
-engine = create_engine('mysql://fepsp_user:filter123@localhost/fepsp_db')
-
 ## Создаем дескриптор сессии
-def createSession():
+def createSession(dbType, dbUser, dbPass, dbAdress, dbScheme):
+    ## Настраиваем подключение к БД
+    engine = create_engine("{0}://{1}:{2}@{3}/{4}".format(dbType, dbUser, dbPass, dbAdress, dbScheme))
     return sessionmaker(bind=engine)
 
 ## Промежуточная таблица обеспечивающая связь many-to-many между экспериментами и тэгами
@@ -280,11 +279,17 @@ class Spike(Base):
 #  Не имеет интерфейса из программы, запускается вручную непосредственно из
 #  интерпритатора.
 def createDB():
+    ## Настраиваем подключение к БД
+    engine = create_engine('mysql://fepsp_user:filter123@localhost/fepsp_db')
+
     Base.metadata.create_all(engine)
 
 ## Служебная операция полного удаления Таблиц со всей информацией из БД.
 #  Не имеет интерфейса из программы, запускается вручную непосредственно из
 #  интерпритатора.
 def dropAll():
+    ## Настраиваем подключение к БД
+    engine = create_engine('mysql://fepsp_user:filter123@localhost/fepsp_db')
+
     Base.metadata.drop_all(engine)
 

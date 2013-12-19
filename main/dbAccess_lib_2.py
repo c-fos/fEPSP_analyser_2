@@ -33,9 +33,9 @@ class Mysql_writer:
     #  Загрузка настроек БД, подключение к БД, создание словарей тегов по
     #  которым следует различать файлы .dat, устанавливается коэффициент для
     #  перевода единиц АЦП в милливольты.
-    def __init__(self):
+    def __init__(self, dbType, dbUser, dbPass, dbAdress, dbScheme):
         self.variables_global()
-        self.dbConnect()
+        self.dbConnect(dbType, dbUser, dbPass, dbAdress, dbScheme)
         self.rTagDict={"reox":"реоксигенация"
                        , "отмывка":"отмывка"
                        , "n2":"гипоксия"
@@ -147,9 +147,9 @@ class Mysql_writer:
     #  Необходимые настройки получаем из предварительно заполненных реквизитов
     #  класса.
     #
-    def dbConnect(self):
+    def dbConnect(self, dbType, dbUser, dbPass, dbAdress, dbScheme):
         try:
-            Session = db.createSession()
+            Session = db.createSession(dbType, dbUser, dbPass, dbAdress, dbScheme)
             self.session = Session()
 
         except:
