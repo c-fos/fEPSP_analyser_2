@@ -1,5 +1,3 @@
-#!/usr/bin/python2
-# -*- coding: utf-8 -*-
 #signal filtering and spike finding
 """
 This program is free software: you can redistribute it and/or modify
@@ -22,6 +20,7 @@ Created on 23.11.2011
 import argparse  #Для передачи аргументов в режиме командной строки
 import os  #для проверки существования файлов
 import sys  #для выхода из программы
+
 from main.workFlow_lib import workFlow  #Передача введеных аргументов основному алгоритму обработки
 
 if __name__ == "__main__":

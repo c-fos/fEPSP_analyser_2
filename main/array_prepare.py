@@ -1,5 +1,3 @@
-#!/usr/bin/python2
-# -*- coding: utf-8 -*-
 ## @package array_prepare Модуль подготовки сигнала к поиску спайков
 #
 #
@@ -9,10 +7,11 @@ Created on 05.12.2011
 
 @author: pilat
 '''
-from numpy import math, empty
-import array_processing_functions as ar
-import sys
 import logging
+
+from numpy import math, empty, ndarray
+
+import main.array_processing_functions as ar
 
 logger = logging.getLogger("workflow.array_prepare")
 
@@ -28,18 +27,19 @@ logger = logging.getLogger("workflow.array_prepare")
 #  Дополненный участок заполняется наиболее часто встречающимся в массиве
 #  числом.
 #
-def dataFitting(data):
+def dataFitting(data: ndarray):
     try:
-        dataLen = len(data)
-        tmp = 2**(math.ceil(math.log(dataLen, 2)))
-        delta = tmp - dataLen
-        meanTmp = ar.histMean(data[:dataLen / 4])
+        dataLen: int = len(data)
+        tmp: int = 2**(math.ceil(math.log(dataLen, 2)))
+        delta: int = tmp - dataLen
+        meanTmp = ar.histMean(data[:round(dataLen / 4)])
         newData = empty(tmp, dtype='float32')
         newData.fill(meanTmp)
         newData[delta:] = data
         return newData, delta
-    except:
-        logger.error("dataFitting # Error: {0}".format(sys.exc_info()))
+    except Exception as e:
+        logger.exception("dataFitting # Error: %s", e)
+        raise e
 
 ## Если запись велась в режиме 5мв/дел домножаем массив на коэфициент
 #
@@ -47,7 +47,7 @@ def dataFitting(data):
 #  слова в названии файла. Возможно это можно определить по анализу шума в
 #  сигнале, но это сложнее.
 #
-def amplLoad(filename, data):
+def amplLoad(filename: str, data: ndarray) -> ndarray:
     if ("5мв" in filename) or ("5мВ" in filename) or ("5mv" in filename) or ("5mV" in filename):
         logger.warn("amplLoad # 5mv amplifier")
         return(data * 2.5)  # *5/2

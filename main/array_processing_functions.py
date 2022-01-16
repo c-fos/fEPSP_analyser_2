@@ -1,5 +1,3 @@
-#!/usr/bin/python2
-# -*- coding: utf-8 -*-
 ## @package Функции для анализа сигнала
 #
 #  В этот модуль вынесены общие функции используемые для преобразования и анализа
@@ -10,10 +8,10 @@ Created on 13.11.2013
 
 @author Malakhin Ilya
 '''
-import sys
-from numpy import arange, histogram, empty, unique, where, float16
-from scipy import signal
 import logging
+
+from numpy import arange, histogram, empty, ndarray, unique, where
+from scipy import signal
 
 logger = logging.getLogger("workflow.array_processing")
 
@@ -23,18 +21,19 @@ logger = logging.getLogger("workflow.array_processing")
 #  2. Строим гистограмму массива по этим числам
 #  3. Определяем для какого числа столбик выше =)
 #  @param sample 1d массив типа numpy.array()
-def histMean(sample):
+def histMean(sample: ndarray) -> ndarray:
     try:
         uniqueValues=unique(sample)
         if len(uniqueValues)>1:
             dataHist=histogram(sample,bins=uniqueValues)
-            histMax=dataHist[0].max()
+            histMax: int=dataHist[0].max()
             meanTmp = dataHist[1][where(dataHist[0]==histMax)[0]]
             return meanTmp[0]
         else:
             return uniqueValues
-    except:
-        logger.error("histMean # Error: {0}".format(sys.exc_info()))
+    except Exception as e:
+        logger.exception("histMean # Error: %s", e)
+        raise e
 
 
 ## Формирует массив значений стандартного отклонения
@@ -62,31 +61,31 @@ def stdArray(sample,frame):
 #  @param data Входящий массив
 #  @param framesize размер рамки считывания
 #
-def getLocalPtp(data, framesize):
+def getLocalPtp(data, framesize: int) -> float:
     ptpList=[]
     smoothedData=signal.medfilt(data, 5)
     smoothedDataLen=len(smoothedData)
     logger.warn("getLocalPtp function. data = {0}, len(data) = {1}, framesize = {2}".format(data, len(data), framesize))
     try:
-        ptpList=[i.ptp() for i in [smoothedData[j:j+framesize] for j in arange(0,smoothedDataLen-framesize,framesize/3)]]
-    except:
-        logger.error("Unexpected error in finding local ptp: {0}".format(sys.exc_info()))
+        ptpList=[i.ptp() for i in [smoothedData[j:j+framesize] for j in arange(0,smoothedDataLen-framesize,round(framesize/3))]]
+    except Exception as e:
+        logger.exception("Unexpected error in finding local ptp: %s", e)
     if ptpList:
         return max(ptpList)
     else:
-        return 0
+        return 0.0
 
 ## Возвращает отношение максимального локального std к максимальному локальному ptp
 #
 #  Попытка оценить отношение сигнала к шуму.
 #
-def snrFinding(data,frameSize):
+def snrFinding(data,frameSize: int):
     logger.warn("snrFinding function. Data = {0}, len(data) = {1}, framesize = {2}".format(data, len(data), frameSize))
     minSD=stdFinder(data,frameSize)
-    maxSD=getLocalPtp(data, frameSize*0.8)
-    snr=float16(maxSD/minSD)
+    maxSD=getLocalPtp(data, round(frameSize*0.8))
+    snr=float(maxSD/minSD)
     logger.warn("snrFinding function results: snr = {0}, maxSD = {1}, minSD = {2}".format(snr, maxSD, minSD))
-    return snr, maxSD, minSD
+    return round(snr,3), round(maxSD,3), round(minSD,3)
 
 ## Возвращает минимальное и максимальное локальные стандартные отклонения в массиве
 #
@@ -95,15 +94,15 @@ def snrFinding(data,frameSize):
 #  стандартное отклонение, максимальное стандартное отклонение, минимальное
 #  стандартное отклонение и среднее той рамки где std было минимальным.
 #
-def stdFinder(data, frameSize, mean=False,maxStd=False):
+def stdFinder(data, frameSize: int, mean=False,maxStd=False):
     dataSample=[]
     minSD=200
     maxSD=0
     i=frameSize
     for j in range(int(len(data)/frameSize)):
         dataSample+=[[i,j,data[j*i:i*(j+1)].mean(),data[j*i:i*(j+1)].std()]]#1/3
-        dataSample+=[[i,j,data[j*i+j/3.0:i*(j+1)+j/3.0].mean(),data[j*i+j/3.0:i*(j+1)+j/3.0].std()]]#2/3
-        dataSample+=[[i,j,data[j*i+j*2/3.0:i*(j+1)+j*2/3.0].mean (),data[j*i+j*2/3.0:i*(j+1)+j*2/3.0].std()]]#3/3
+        dataSample+=[[i,j,data[j*i+round(j/3.0):i*(j+1)+round(j/3.0)].mean(),data[j*i+round(j/3.0):i*(j+1)+round(j/3.0)].std()]]#2/3
+        dataSample+=[[i,j,data[j*i+round(j*2/3.0):i*(j+1)+round(j*2/3.0)].mean (),data[j*i+round(j*2/3.0):i*(j+1)+round(j*2/3.0)].std()]]#3/3
     if len(dataSample)>0:
         for k in range(len(dataSample)):
             if dataSample[k][3]< minSD and dataSample[k][3]!=0:
@@ -112,16 +111,16 @@ def stdFinder(data, frameSize, mean=False,maxStd=False):
             if dataSample[k][3]>maxSD and dataSample[k][3]!=0:
                 maxSD=dataSample[k][3]
         if mean==True:
-            return minSD,dataSample[index][2]
+            return round(minSD, 3)  #,dataSample[index][2]
         else:
             if maxStd==True:
                 logger.warn((maxSD,len(dataSample)))
-                return maxSD
+                return round(maxSD, 3)
             else:
-                return minSD
+                return round(minSD, 3)
     else:
         if mean==True:
-            return data.std(),data.mean()
+            return round(data.std(), 3)  # , data.mean()
         else:
-            return data.std()
+            return round(data.std(), 3)
 

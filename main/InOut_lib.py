@@ -1,5 +1,3 @@
-#!/usr/bin/python2
-# -*- coding: utf-8 -*-
 ## @package InOut_lib Модуль чтения и записи из файлов и отрисовки изображений
 #
 #
@@ -9,13 +7,16 @@ Created on 05.12.2011
 
 @author: pilat
 '''
+
 import sys
+import logging
+
 from mimetypes import guess_type
 from numpy import loadtxt, fromfile, int16
 from matplotlib.patches import Rectangle
 import matplotlib.pyplot as plt
-import array_prepare as ap
-import logging
+
+import main.array_prepare as ap
 
 logger = logging.getLogger("workflow.InOut")
 
@@ -26,15 +27,14 @@ logger = logging.getLogger("workflow.InOut")
 #  определяется по mime типу файла. Если он текстовый, то читается как
 #  текст, в противном случае читается как бинарный.
 #
-def dataLoading(fileName):
+def dataLoading(fileName: str):
     if guess_type(fileName)[0] == 'text/plain' or guess_type(fileName)[0] == 'chemical/x-mopac-input':
         tmpData = loadtxt(fileName,dtype='float32')
         source_data = ap.amplLoad(fileName, tmpData)
-        data, deltaLen = ap.dataFitting(source_data)
     else:
         data = fromfile(fileName, int16)
-        source_data = ap.amplLoad(fileName, tmpData)
-        data, deltaLen = ap.dataFitting(source_data)
+        source_data = ap.amplLoad(fileName, data)
+    data, deltaLen = ap.dataFitting(source_data)
     return data, deltaLen, source_data
 
 
@@ -50,12 +50,12 @@ def freqLoad(filename, defFrequ, varName = "CodingFreq"):
         dictionary = {}
         iniName = "{0}.ins".format(filename.strip('.dat'))
         logger.warn("freqLoad # .ins file name: {0}".format(iniName))
-        fd = file(iniName,'r')
-        for line in fd.readlines():
-            pairs = line.split("=")
-            for variable, value in zip(pairs[::2], pairs[1::2]):
-                dictionary[variable] = value.strip()
-        frequency = int(dictionary[varName].strip()) * 1000
+        with open(iniName,'r') as fd:
+            for line in fd.readlines():
+                pairs = line.split("=")
+                for variable, value in zip(pairs[::2], pairs[1::2]):
+                    dictionary[variable] = value.strip()
+            frequency = int(dictionary[varName].strip()) * 1000
     except:
         logger.error("freqLoad # Error: {0}".format(sys.exc_info()))
         frequency = int(defFrequ)
@@ -75,7 +75,7 @@ def plotData(analyserObj):
         ax.grid(color='k', linestyle='-', linewidth=0.4)
         try:
             logger.warn("plotData # analyserObj.responseDict: {0}".format(analyserObj.responseDict))
-            for i in analyserObj.responseDict.values():
+            for i in list(analyserObj.responseDict.values()):
                 tmpObject=getattr(analyserObj,i)
                 logger.warn("plotData # tmpObject created")
                 rect = Rectangle((tmpObject.responseStart, tmpObject.response_bottom),

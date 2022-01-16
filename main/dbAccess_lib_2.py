@@ -1,5 +1,3 @@
-#!/usr/bin/python2
-# -*- coding: utf-8 -*-
 ## @package dbAccess_lib
 #  Модуль доступа к БД.
 #
@@ -10,24 +8,22 @@ Created on 05.12.2011
 
 @author: pilat
 '''
+import logging
+import pickle
+import sys
+
 import datetime as dt
 from os import stat
-import sys, pickle
-from numpy import median, diff
-import dbModel as db
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine, Date, DateTime, Boolean, Float, Column, Integer, String, Table
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import relationship
-import logging
+
+import main.dbModel as db
+
 
 logger = logging.getLogger("workflow.dbAccess")
 
 ## Класс, в методах которого реализованны необходимые обращения к БД.
 #
 #
-class Mysql_writer:
+class DB_writer:
     ## Конструктор
     #
     #  Загрузка настроек БД, подключение к БД, создание словарей тегов по
@@ -235,7 +231,7 @@ class Mysql_writer:
         #
         def findTags(tagString, tagDict, tagMask):
             tagList=[]
-            for i in tagDict.keys():
+            for i in list(tagDict.keys()):
                 if (i in tagString) and (all([j not in tagString for j in tagMask])):
                     tagList.append(tagDict[i])
             return tagList
@@ -254,14 +250,15 @@ class Mysql_writer:
     #  @param tmpObject Экземпляр класса Response
     #
     def dbWriteResponse(self, tmpObject):
-        rNumber = tmpObject.responsNumber
-        epsp = tmpObject.epsp*self.koef
+        rNumber = int(tmpObject.responsNumber)
+        epsp = float(tmpObject.epsp*self.koef)
         nOfSpikes = len(tmpObject.spikes)
         rLength = tmpObject.length
         #epspArea = tmpObject.epspArea
         epspFront = tmpObject.epspFront
         epspBack = tmpObject.epspBack
         epilept = tmpObject.epspEpileptStd
+
         newRespons = db.Response(self.idRecord, rNumber, nOfSpikes, rLength,
                                   epsp, epspFront, epspBack, epilept)
         self.session.add(newRespons)
@@ -307,18 +304,18 @@ class Mysql_writer:
     #  @param tmpObject Экземпляр класса Spike
     #
     def dbWriteSpike(self, tmpObject):
-        ampl = tmpObject.spikeAmpl*self.koef
-        number = tmpObject.spikeNumber
-        sLength = tmpObject.spikeLength  # must be changed to length at 80% or something like that
-        maxdiff = (tmpObject.spikeMax2Val-tmpObject.spikeMax1Val)*self.koef
-        angle1 = tmpObject.spikeFront
-        angle2 = tmpObject.spikeBack
-        delay = tmpObject.spikeDelay
-        maxToMin = tmpObject.spikeMaxToMin*self.koef
+        ampl = float(tmpObject.spikeAmpl*self.koef)
+        number = int(tmpObject.spikeNumber)
+        sLength = float(tmpObject.spikeLength)  # must be changed to length at 80% or something like that
+        maxdiff = float((tmpObject.spikeMax2Val-tmpObject.spikeMax1Val)*self.koef)
+        angle1 = float(tmpObject.spikeFront)
+        angle2 = float(tmpObject.spikeBack)
+        delay = float(tmpObject.spikeDelay)
+        maxToMin = float(tmpObject.spikeMaxToMin*self.koef)
         area = tmpObject.area
         fibre = tmpObject.fibre
         manual = tmpObject.manual
-
+    
         newSpike = db.Spike(self.idResponse, ampl, number, sLength, maxdiff,
                             angle1, angle2, delay, maxToMin, area, fibre, manual)
         self.session.add(newSpike)
@@ -347,7 +344,7 @@ class Mysql_writer:
         self.session.close()
 
     ## Создаем запись в которую по ходу алгоритма записываем значения переменных и коефициентов
-    def dbWriteTechInfo(self, frame, stimDur):
+    def dbWriteTechInfo(self, frame: int, stimDur: int):
         tech = db.TechInfo(self.idRecord, frame, stimDur)
         self.session.add(tech)
         self.session.commit()
@@ -361,7 +358,7 @@ class Mysql_writer:
         self.session.add(tech)
 
     ## Добавляем в техИнфо значения главного уровня вейвлет разложения и характеристики сигнала до фильтрации
-    def dbTechInfo_level(self, _snr, _ptp, _std, mainLevel):
+    def dbTechInfo_level(self, _snr: float, _ptp: float, _std: float, mainLevel: int):
         tech = self.session.query(db.TechInfo).filter(db.TechInfo.id == self.idTech).one()
         tech.snr = _snr
         tech.ptp = _ptp

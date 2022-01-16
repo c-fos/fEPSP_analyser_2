@@ -1,46 +1,33 @@
-# -*- coding: utf-8 -*-
 import sys
-from PyQt4 import QtCore, QtGui
-from simple import Ui_MainWindow
-from workFlow_lib import workFlow
-from dbAccess_lib_2 import Mysql_writer
 import pickle, codecs
-import InOut_lib as ioLib
 
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    _fromUtf8 = lambda s: s
+from PyQt5 import QtCore, QtGui, QtWidgets
 
-class MyForm(QtGui.QMainWindow):
+from main.simple import Ui_MainWindow
+from main.workFlow_lib import workFlow
+from main.dbAccess_lib_2 import DB_writer
+import main.InOut_lib as ioLib
+
+class MyForm(QtWidgets.QMainWindow):
     def __init__(self, parent = None):
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.db = Mysql_writer("mysql", self.ui.dbUserLine.text(), self.ui.dbPassLine.text(), self.ui.dbServerIpLine.text(), self.ui.dbNameLine.text())
-        self.fsmodel = QtGui.QFileSystemModel()
+        self.db = DB_writer("postgresql", self.ui.dbUserLine.text(), self.ui.dbPassLine.text(), self.ui.dbServerIpLine.text(), self.ui.dbNameLine.text())
+        self.fsmodel = QtWidgets.QFileSystemModel()
         self.stmodel = QtGui.QStandardItemModel()
         self.root_index = self.fsmodel.setRootPath(self.ui.pathLine.text())
-        QtCore.QObject.connect(self.ui.sourceList, QtCore.SIGNAL(_fromUtf8("doubleClicked(QModelIndex)")),\
+        self.ui.sourceList.doubleClicked[QtCore.QModelIndex].connect(\
          self.sourceListClicked)
-        QtCore.QObject.connect(self.ui.pathLine, QtCore.SIGNAL(_fromUtf8("editingFinished()")),\
-                 self.show_path)
-        QtCore.QObject.connect(self.ui.fEPSP_button, QtCore.SIGNAL(_fromUtf8("clicked()")),\
-                 self.fEPSP_start)
-        QtCore.QObject.connect(self.ui.upButton, QtCore.SIGNAL(_fromUtf8("clicked()")),\
-                 self.pathUp)
-        QtCore.QObject.connect(self.ui.clearDbButton, QtCore.SIGNAL(_fromUtf8("clicked()")),\
-                 self.rmDbConfig)
-        QtCore.QObject.connect(self.ui.saveDbButton, QtCore.SIGNAL(_fromUtf8("clicked()")),\
-                 self.mkDbConfig)
-        QtCore.QObject.connect(self.ui.exportRefresh, QtCore.SIGNAL(_fromUtf8("clicked()")),\
-                 self.expNameUpdate)
-        QtCore.QObject.connect(self.ui.expToDeleteRefresh, QtCore.SIGNAL(_fromUtf8("clicked()")),\
-                 self.delNameUpdate)
-        QtCore.QObject.connect(self.ui.exportButton, QtCore.SIGNAL(_fromUtf8("clicked()")),\
-                 self.export)
-        QtCore.QObject.connect(self.ui.Delete, QtCore.SIGNAL(_fromUtf8("clicked()")),\
-                 self.deleteExp)
+        self.ui.pathLine.editingFinished.connect(self.show_path)
+        self.ui.fEPSP_button.clicked.connect(self.fEPSP_start)
+        self.ui.upButton.clicked.connect(self.pathUp)
+        self.ui.clearDbButton.clicked.connect(self.rmDbConfig)
+        self.ui.saveDbButton.clicked.connect(self.mkDbConfig)
+        self.ui.exportRefresh.clicked.connect(self.expNameUpdate)
+        self.ui.expToDeleteRefresh.clicked.connect(self.delNameUpdate)
+        self.ui.exportButton.clicked.connect(self.export)
+        self.ui.Delete.clicked.connect(self.deleteExp)
 
         sourceList = self.ui.sourceList
         sourceList.setModel(self.fsmodel)
@@ -52,20 +39,18 @@ class MyForm(QtGui.QMainWindow):
         print("this function has not implemented yet")
 
     def mkDbConfig(self):
-        fd = open("dbConfig",'w')
-        tmpList=[str(self.ui.dbServerIpLine.text()), str(self.ui.dbNameLine.text()), str(self.ui.dbUserLine.text()), str(self.ui.dbPassLine.text())]
-        pickle.dump(tmpList, fd)
-        fd.close()
+        with open("./main/dbConfig",'wb') as fd:
+            tmpList=[str(self.ui.dbServerIpLine.text()), str(self.ui.dbNameLine.text()), str(self.ui.dbUserLine.text()), str(self.ui.dbPassLine.text())]
+            pickle.dump(tmpList, fd)
 
     def loadConfig(self):
         try:
-            fd = open("dbConfig",'r')
-            dbAccessVars = pickle.load(fd)
-            fd.close()
-            self.ui.dbServerIpLine.setText(dbAccessVars[0])
-            self.ui.dbNameLine.setText(dbAccessVars[1])
-            self.ui.dbUserLine.setText(dbAccessVars[2])
-            self.ui.dbPassLine.setText(dbAccessVars[3])
+            with open("./main/dbConfig",'rb') as fd:
+                dbAccessVars = pickle.load(fd)
+                self.ui.dbServerIpLine.setText(dbAccessVars[0])
+                self.ui.dbNameLine.setText(dbAccessVars[1])
+                self.ui.dbUserLine.setText(dbAccessVars[2])
+                self.ui.dbPassLine.setText(dbAccessVars[3])
         except:
             pass
 
@@ -94,7 +79,7 @@ class MyForm(QtGui.QMainWindow):
                    ,"tags":substance
                    ,"manual":manual
                    ,"debug":debug
-                   ,"dbConf":{"dbType":"mysql"
+                   ,"dbConf":{"dbType":"postgresql"
                              ,"dbUser":self.ui.dbUserLine.text()
                              ,"dbPass":self.ui.dbPassLine.text()
                              ,"dbAdress":self.ui.dbServerIpLine.text()
@@ -167,7 +152,7 @@ class MyForm(QtGui.QMainWindow):
         ioLib.writeExport(fileName, data)
 
 if __name__ == "__main__":
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     myapp = MyForm()
     myapp.show()
     sys.exit(app.exec_())

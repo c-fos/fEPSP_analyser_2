@@ -1,5 +1,3 @@
-#!/usr/bin/python2
-# -*- coding: utf-8 -*-
 ## @package workFlow_lib
 #  Модуль содержащий алгоритм обработки эксперимента в целом.
 #
@@ -26,14 +24,16 @@ Created on 23.11.2011
 @author: Malakhin Ilya (pilat1988@gmail.com)
 
 '''
+import sys
+import shutil
+import logging
+
 from os import stat
 import datetime as dt
 from glob import glob
-import sys
-from dbAccess_lib_2 import Mysql_writer
-from analyser_lib import dataSample
-import shutil, logging
 
+from main.dbAccess_lib_2 import DB_writer
+from main.analyser_lib import dataSample
 
 ## Функция определяющая алгоритм обработки на уровне эксперимента
 def workFlow(argDict):
@@ -64,24 +64,24 @@ def workFlow(argDict):
         logger.warn("There are no *.dat files in the directory! Exit!")
         sys.exit(1)
     if argDict["write"]:
-        mysql_writer = Mysql_writer(argDict["dbConf"]["dbType"], argDict["dbConf"]["dbUser"], argDict["dbConf"]["dbPass"], argDict["dbConf"]["dbAdress"], argDict["dbConf"]["dbScheme"])
-        mysql_writer.loadExpInfo(fileList[0], argDict["tags"])
+        db_writer = DB_writer(argDict["dbConf"]["dbType"], argDict["dbConf"]["dbUser"], argDict["dbConf"]["dbPass"], argDict["dbConf"]["dbAdress"], argDict["dbConf"]["dbScheme"])
+        db_writer.loadExpInfo(fileList[0], argDict["tags"])
         logger.info("Write to database enabled")
-        mysql_writer.dbWriteExperiment()
-        mysql_writer.tagWriter()
+        db_writer.dbWriteExperiment()
+        db_writer.tagWriter()
     else:
         logger.info("Write to database doesn`t enabled")
-        mysql_writer="pass"
+        db_writer="pass"
     for i in fileList:
         fileName = i.split('/')[-1]
         try:
             creatingTime = dt.datetime.fromtimestamp(stat(i).st_mtime).time()
             if argDict["write"]:
-                mysql_writer.filePath = i
-                mysql_writer.time = creatingTime
-                mysql_writer.dbWriteRecord()
-                mysql_writer.dbWriteRecordTags(fileName)
-            dataSample1 = dataSample(i, mysql_writer, argDict)
+                db_writer.filePath = i
+                db_writer.time = creatingTime
+                db_writer.dbWriteRecord()
+                db_writer.dbWriteRecordTags(fileName)
+            dataSample1 = dataSample(i, db_writer, argDict)
             dataSample1.dataProcessing()
             if dataSample1.hardError==1:
                 errorProcessing(i, "hard", logger)
@@ -90,15 +90,15 @@ def workFlow(argDict):
             else:
                 pass
             del dataSample1
-        except:
-            logger.error("Error: {0}".format(sys.exc_info()))
+        except Exception as e:
+            logger.exception("Error: %s", e)
             try:
                 del dataSample1
             except:
                 pass
     if argDict["write"]:
         try:
-            mysql_writer.dbDisconnect()
+            db_writer.dbDisconnect()
         except:
             logger.error("Unexpected error in dbDisconect: {0}".format(sys.exc_info()))
 
@@ -107,9 +107,9 @@ def errorProcessing(filename, errorType, logger):
     try:
         logger.info("copy file with trouble to separate directory")
         if errorType=="soft":
-            shutil.copy2(filename,"./softErrors/")
+            shutil.copy2(filename,"./main/softErrors/")
         else:
-            shutil.copy2(filename,"./hardErrors/")
-    except:
-        logger.error("Can`t copy files with errors: {0}".format(sys.exc_info()))
-        raise
+            shutil.copy2(filename,"./main/hardErrors/")
+    except Exception as e:
+        logger.exception("Can`t copy files with errors: %s", e)
+        raise e

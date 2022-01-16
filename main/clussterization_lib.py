@@ -1,5 +1,3 @@
-#!/usr/bin/python2
-# -*- coding: utf-8 -*-
 ## @package clussterization_lib
 #  Модуль работы с большим количеством стимулов в записи.
 #
@@ -17,16 +15,16 @@ Created on 15.02.2012
 
 @author: pilat
 '''
-
-from numpy import array, where, zeros
 import sys
 import logging
+
+from numpy import array, where, zeros
 
 logger = logging.getLogger("clussterization_lib")
 
 def clusterization(fromObject, spikeDict, stimuli):
     if len(spikeDict) > 1:
-        dictValues = array(spikeDict.values())
+        dictValues = array(list(spikeDict.values()))
         listOfSpikes = []
         for i in dictValues:
             tmpObject = getattr(fromObject, i)
@@ -41,7 +39,7 @@ def clusterization(fromObject, spikeDict, stimuli):
         return(array([1]))
 
 def clusterAnalyser(fromObject, spikeDict, clusters):
-    dictValues = array(spikeDict.values())
+    dictValues = array(list(spikeDict.values()))
     for i in range(len(dictValues)):
         try:
             tmpObject = getattr(fromObject, dictValues[i])

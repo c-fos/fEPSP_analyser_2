@@ -1,4 +1,8 @@
 ## @package dbModel Модуль описания структуры БД
+# на самом деле не помню что это за файл,
+# видимо служебный для сбора в БД информации о работе самой программы
+# и для последующей доработки на основе этих данных
+# нигде сейчас не используется, но может содержать полезный код
 '''
 Created on 21.11.2013
 
@@ -12,25 +16,31 @@ from sqlalchemy.orm import relationship, backref
 
 ## Определяем необходимые глобальные переменные
 Base = declarative_base()
+## Настраиваем подключение к БД
+engine = create_engine('mysql://fepsp_user:filter123@localhost/fepsp_db')
+
 ## Создаем дескриптор сессии
-def createSession(dbType, dbUser, dbPass, dbAdress, dbScheme):
-    ## Настраиваем подключение к БД
-    engine = create_engine("{0}://{1}:{2}@{3}/{4}".format(dbType, dbUser, dbPass, dbAdress, dbScheme))
+def createSession():
     return sessionmaker(bind=engine)
 
 ## Промежуточная таблица обеспечивающая связь many-to-many между экспериментами и тэгами
 experiment_tag = Table('experiment_tag', Base.metadata,
     Column('experiment_id', Integer, ForeignKey('experiment.id')),
-    Column('tag_id', Integer, ForeignKey('exptag.id')))
+    Column('tag_id', Integer, ForeignKey('exptag.id')),
+    mysql_engine='InnoDB',
+    mysql_charset='utf8'   )
 
 ## Промежуточная таблица обеспечивающая связь many-to-many между записями и тэгами
 record_tag = Table('record_tag', Base.metadata,
     Column('record_id', Integer, ForeignKey('record.id')),
-    Column('tag_id', Integer, ForeignKey('rectag.id')))
+    Column('tag_id', Integer, ForeignKey('rectag.id')),
+    mysql_engine='InnoDB',
+    mysql_charset='utf8')
 
 ## Таблица тэгов для описания эксперимента
 class expTag(Base):
     __tablename__ = 'exptag'
+    __table_args__ = {'mysql_charset': 'utf8', 'mysql_engine': 'InnoDB'}
 
     id = Column(Integer, primary_key=True)
     name = Column(String(40))  # Тэг
@@ -43,6 +53,7 @@ class expTag(Base):
 ## Таблица тэгов для описания записи
 class recTag(Base):
     __tablename__ = 'rectag'
+    __table_args__ = {'mysql_charset': 'utf8', 'mysql_engine': 'InnoDB'}
 
     id = Column(Integer, primary_key=True)
     name = Column(String(40))  # Тэг
@@ -55,6 +66,7 @@ class recTag(Base):
 ## Таблица для описания эксперимента
 class Experiment(Base):
     __tablename__ = 'experiment'
+    __table_args__ = {'mysql_charset': 'utf8', 'mysql_engine': 'InnoDB'}
 
     id = Column(Integer, primary_key=True)
     name = Column(String(200))  # Имя эксперимента
@@ -70,6 +82,7 @@ class Experiment(Base):
 ## Таблица для описания записи
 class Record(Base):
     __tablename__ = 'record'
+    __table_args__ = {'mysql_charset': 'utf8', 'mysql_engine': 'InnoDB'}
 
     id = Column(Integer, primary_key=True)
     experiment = Column(Integer, ForeignKey('experiment.id'))
@@ -98,6 +111,7 @@ class Record(Base):
 #
 class TechInfo(Base):
     __tablename__ = 'techInfo'
+    __table_args__ = {'mysql_charset': 'utf8', 'mysql_engine': 'InnoDB'}
 
     id = Column(Integer, primary_key=True)
     defFrame = Column(Integer)
@@ -126,6 +140,7 @@ class TechInfo(Base):
 #  записи.
 class StimProp(Base):
     __tablename__ = 'stimProp'
+    __table_args__ = {'mysql_charset': 'utf8', 'mysql_engine': 'InnoDB'}
 
     id = Column(Integer, primary_key=True)
     number = Column(Integer)
@@ -175,6 +190,7 @@ class StimProp(Base):
 #  записи.
 class WaveLevel(Base):
     __tablename__ = 'waveLevel'
+    __table_args__ = {'mysql_charset': 'utf8', 'mysql_engine': 'InnoDB'}
 
     id = Column(Integer, primary_key=True)
     level = Column(Integer)
@@ -201,6 +217,7 @@ class WaveLevel(Base):
 ## Таблица для описания группы спайков в ответ на один стимул
 class Response(Base):
     __tablename__ = 'response'
+    __table_args__ = {'mysql_charset': 'utf8', 'mysql_engine': 'InnoDB'}
 
     id = Column(Integer, primary_key=True)
     record = Column(Integer, ForeignKey('record.id'))
@@ -228,6 +245,7 @@ class Response(Base):
 ## Таблица для описания отдельного спайка
 class Spike(Base):
     __tablename__ = 'spike'
+    __table_args__ = {'mysql_charset': 'utf8', 'mysql_engine': 'InnoDB'}
 
     id = Column(Integer, primary_key=True)
     response = Column(Integer, ForeignKey('response.id'))
@@ -264,17 +282,11 @@ class Spike(Base):
 #  Не имеет интерфейса из программы, запускается вручную непосредственно из
 #  интерпритатора.
 def createDB():
-    ## Настраиваем подключение к БД
-    engine = create_engine('postgresql://fepsp_user:filter123@localhost/fepsp_db')
-
     Base.metadata.create_all(engine)
 
 ## Служебная операция полного удаления Таблиц со всей информацией из БД.
 #  Не имеет интерфейса из программы, запускается вручную непосредственно из
 #  интерпритатора.
 def dropAll():
-    ## Настраиваем подключение к БД
-    engine = create_engine('postgresql://fepsp_user:filter123@localhost/fepsp_db')
-
     Base.metadata.drop_all(engine)
 

@@ -1,5 +1,3 @@
-#!/usr/bin/python2
-# -*- coding: utf-8 -*-
 ## @package analyser_lib Модуль анализа сигнала
 #
 #
@@ -12,36 +10,38 @@ Created on 05.12.2011
 #library for filtering
 import sys
 import os
-from numpy import zeros, log, asmatrix, math, sqrt, ones, diff, array,\
-                    unique, where, float16, argmin, median
 import pywt
 import tempfile
+import logging
+
+from numpy import intp, ndarray, zeros, log, math, sqrt, ones, diff, array,\
+                    unique, where, float16, argmin, median
 os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
 import matplotlib
-matplotlib.use('agg')
+# matplotlib.use('agg')
 from matplotlib.widgets import Cursor
 import matplotlib.pyplot as plt
-from externalFunctions_lib import iswt, extrema
-from objects_lib import Spike, Response
 from scipy import polyval, polyfit, signal
-from clussterization_lib import clusterization, clusterAnalyser
-import rInterface_lib as rInterface
-import array_processing_functions as ar
-#import main.array_prepare as ap
-import InOut_lib as ioLib
-import logging
+
+from main.externalFunctions_lib import iswt, extrema
+from main.objects_lib import Spike, Response
+from main.clussterization_lib import clusterization, clusterAnalyser
+import main.rInterface_lib as rInterface
+import main.array_processing_functions as ar
+import main.InOut_lib as ioLib
+from main.dbAccess_lib_2 import DB_writer
 
 logger = logging.getLogger("workflow.analyser")
 
 class dataSample:
-    def __init__(self, filename, dbobject, argDict):
+    def __init__(self, filename, dbobject: DB_writer, argDict):
         #variables
         self.spikeObjectList=[]
         self.spikeDict={}
         self.responseList=[]
         self.responseDict={}
         self.fileName = filename
-        self.mysql_writer = dbobject
+        self.db_writer: DB_writer = dbobject
         self.argDict = argDict
         self.hardError = 0
         self.softError = 0
@@ -50,7 +50,7 @@ class dataSample:
         self.epsp = 0
         self.frequency = 0
         self.result = []
-        self.signalPtp = 0
+        self.signalPtp = 0.0
         self.localDelay = 0
         self.highNoiseLevel = 0
         self.clusters = []
@@ -59,7 +59,7 @@ class dataSample:
         self.baseFrequency = 300
         self.deltaLen = 0
         self.minimumsForFibre = []
-        self.snr = 0
+        self.snr = 0.0
         self.data = []
         self.level = 0
         self.cleanData = []
@@ -67,7 +67,8 @@ class dataSample:
         self.mainLevel = 0
         self.stimulyDuration = 0
         self.stimuli = 0
-        self.signalStd = 0
+        self.signalStd = 0.0
+        self.responseStart = 0
 
 
     def dataProcessing(self):
@@ -83,7 +84,7 @@ class dataSample:
             logger.error("dataLoading() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         try:
-            self.mysql_writer.addSource(self.frequency, self.source_data)
+            self.db_writer.addSource(self.frequency, self.source_data)
         except:
             logger.error("addSource() error: {0}".format(sys.exc_info()))
         try:
@@ -92,7 +93,7 @@ class dataSample:
             logger.error("tresholdCreating() error: {0}".format(sys.exc_info()))
             self.hardError = 1
         try:
-            self.mysql_writer.dbWriteTechInfo(self.defaultFrame, self.stimulyDuration)
+            self.db_writer.dbWriteTechInfo(self.defaultFrame, self.stimulyDuration)
         except:
             logger.error("Unexpected error wile dbWriteTechInfo: {0}".format(sys.exc_info()))
         try:
@@ -108,10 +109,10 @@ class dataSample:
             self.hardError = 1
         try:
             self.mainLevelFinding()
-        except:
-            logger.error("mainLevelFinding() error: {0}".format(sys.exc_info()))
+        except Exception as e:
+            logger.exception("mainLevelFinding() error: %s", e)
             self.hardError = 1
-        self.mysql_writer.dbTechInfo_level(self.snr, self.signalPtp,
+        self.db_writer.dbTechInfo_level(self.snr, self.signalPtp,
                                            self.signalStd, self.mainLevel)
         try:
             self.resultRough = self.filtering(self.argDict["smooth"])
@@ -121,8 +122,8 @@ class dataSample:
             self.hardError = 1
         try:
             self.spikeFinding()
-        except:
-            logger.error("spikeFinding() error: {0}".format(sys.exc_info()))
+        except Exception as e:
+            logger.exception("spikeFinding() error: %s", e)
             self.hardError = 1
         try:
             self.clusters = clusterization(self, self.spikeDict, self.stimuli)
@@ -136,8 +137,8 @@ class dataSample:
             self.hardError = 1
         try:
             self.responsMatrix = self.responsLength()
-        except:
-            logger.error("responsLength() error: {0}".format(sys.exc_info()))
+        except Exception as e:
+            logger.exception("responsLength() error: %s", e)
             self.hardError = 1
         try:
             self.responsAnalysis()
@@ -149,15 +150,15 @@ class dataSample:
         except:
             logger.error("plotData() error: {0}".format(sys.exc_info()))
             self.hardError = 1
-        if self.mysql_writer!="pass":
+        if self.db_writer!="pass":
             try:
                 self.writeData()
-            except:
-                logger.error("writeData() error: {0}".format(sys.exc_info()))
+            except Exception as e:
+                logger.exception("writeData() error: %s", e)
                 self.hardError = 1
             if self.hardError!=0 or self.softError!=0:
                 try:
-                    self.mysql_writer.dbWriteError(self.softError,
+                    self.db_writer.dbWriteError(self.softError,
                                                    self.hardError)
                 except:
                     logger.error("dbWriteError error: {0}".format(sys.exc_info()))
@@ -171,7 +172,7 @@ class dataSample:
     #
     def tresholdCreating(self):
         msec = self.frequency / 1000 # 1 msec =  frequency/1000 points
-        self.defaultFrame = 4 * msec #frame size for mean() and std() finding must depend on frequency. assume it equal to 4 msec
+        self.defaultFrame = round(4 * msec) #frame size for mean() and std() finding must depend on frequency. assume it equal to 4 msec
         self.stimulyDuration = int(0.8 * msec) #1msec# treshold for stimuli filtering ~20points==2msec==2*self.msec
         self.level = int((math.log(100.0 / self.frequency, 0.5) - 1)) #wavelet decomposition level. level 6 to 10kHz signal.
         highNoiseFrequency = 14000.0
@@ -185,17 +186,18 @@ class dataSample:
     #  составляющей. Проверяем эти всплески на то являются ли они спайками с
     #  помощью нейронной сети
     #
-    def findStimuli(self, data):
+    def findStimuli(self, data: ndarray):
         wavelet='haar'
         filterSize = pywt.Wavelet(wavelet).dec_len
         pwr = pywt.swt(data, wavelet, 2)
         pwr2 = array(pwr[0][1])  # вейвлет коефициенты высокочастотной составляющей сигнала
-        pwr2Std = ar.stdFinder(pwr2[self.deltaLen:], self.defaultFrame)
-        treshold = pwr2Std*1.5*log(pwr2.ptp()/pwr2Std)#11 - empirical finding coef
+        pwr2Std = float(ar.stdFinder(pwr2[self.deltaLen:], self.defaultFrame))
+        treshold = float(round(pwr2Std*1.5*log(pwr2.ptp()/pwr2Std), 3))#11 - empirical finding coef
         try:
-            self.mysql_writer.dbTechInfo_stim(pwr2Std, treshold)
-        except:
-            logger.warn("findStimuli # Error: {0}".format(sys.exc_info()))
+            logger.warning("type(p2s): %s, type(treshold): %s", type(pwr2Std), type(treshold))
+            self.db_writer.dbTechInfo_stim(pwr2Std, treshold)
+        except Exception as e:
+            logger.warn("findStimuli # Error: %s", e)
 
         pwr5 = zeros(len(pwr2))
         # pwr5 по сути первая производная от вейвлет коефициентов
@@ -212,32 +214,33 @@ class dataSample:
         for i in range(len(dpwr)-1):
             if dpwr[i+1]-dpwr[i] < self.stimulyDuration/3.0:  # если две точки слишком близко, то оставляем первую.
                 dpwrMask[i+1] = 0
-        dpwr = dpwr[dpwrMask]
+        dpwr: ndarray = dpwr[dpwrMask]
         dpwrMask = ones(len(dpwr), dtype='bool')
         for i in range(len(dpwr)):
             #  по характеристикам сигнала в окрестностях этих точек будем
             #  решать является ли это артефактом от электрического стимула.
-            length1 = len(where((abs(diff(pwr2[dpwr[i]+filterSize:dpwr[i]+filterSize+self.stimulyDuration/2])) >= treshold))[0])
-            sample1 = data[dpwr[i]+filterSize*2:dpwr[i]+filterSize*2+self.stimulyDuration/2]
-            sample2 = data[dpwr[i]+filterSize*2-self.stimulyDuration/2:dpwr[i]+filterSize*2]
-            sample3 = pwr2[dpwr[i]+filterSize:dpwr[i]+filterSize+self.stimulyDuration/2]
-            sample4 = pwr2[dpwr[i]+filterSize-self.stimulyDuration/2:dpwr[i]+filterSize]
-            sample5 = data[dpwr[i]+filterSize*2-self.stimulyDuration/2:dpwr[i]+filterSize*2+self.stimulyDuration/2]
+            halfDuration = round(self.stimulyDuration/2)
+            length1 = len(where((abs(diff(pwr2[dpwr[i]+filterSize:dpwr[i]+filterSize+halfDuration])) >= treshold))[0])
+            sample1 = data[dpwr[i]+filterSize*2:dpwr[i]+filterSize*2+halfDuration]
+            sample2 = data[dpwr[i]+filterSize*2-halfDuration:dpwr[i]+filterSize*2]
+            sample3 = pwr2[dpwr[i]+filterSize:dpwr[i]+filterSize+halfDuration]
+            sample4 = pwr2[dpwr[i]+filterSize-halfDuration:dpwr[i]+filterSize]
+            sample5 = data[dpwr[i]+filterSize*2-halfDuration:dpwr[i]+filterSize*2+halfDuration]
             sampleSumDiff = abs(median(sample1)-median(sample2))
-            std_diff = sample3.std()/sample4.std()
-            ptp_diff = abs(sample3).mean()/abs(sample4).mean()
+            std_diff = float(round(sample3.std()/sample4.std(), 3))
+            ptp_diff = float(round(abs(sample3).mean()/abs(sample4).mean(), 3))
             sampleGlobalStd = median(sample5)/median(sample2)
             length = length1*100000.0/self.frequency
-            ptp_1 = sample1.ptp()*0.1
-            ptp_2 = sample2.ptp()*0.1
-            std_1 = sample1.std()
-            std_2 = sample2.std()
-            median_1 = median(sample1)*0.1
-            median_2 = median(sample2)*0.1
-            mean_1 = sample1.mean()*0.1
-            mean_2 = sample2.mean()*0.1
-            median_diff_1 = median(diff(sample1*1.0))
-            median_diff_2 = median(diff(sample2*1.0))
+            ptp_1 = float(round(sample1.ptp()*0.1, 3))
+            ptp_2 = float(round(sample2.ptp()*0.1, 3))
+            std_1 = float(round(sample1.std(), 3))
+            std_2 = float(round(sample2.std(), 3))
+            median_1 = float(round(median(sample1)*0.1, 3))
+            median_2 = float(round(median(sample2)*0.1, 3))
+            mean_1 = float(round(sample1.mean()*0.1, 3))
+            mean_2 = float(round(sample2.mean()*0.1, 3))
+            median_diff_1 = float(median(diff(sample1*1.0)))
+            median_diff_2 = float(median(diff(sample2*1.0)))
             if sampleSumDiff > 0:
                 neuroTestResult = rInterface.stimNeuroCheck(length,
                                                             ptp_1,
@@ -253,7 +256,7 @@ class dataSample:
                                                             std_diff,
                                                             ptp_diff) >= 0.5
                 try:
-                    self.mysql_writer.dbStimProp_write(i, length, ptp_1, ptp_2,
+                    self.db_writer.dbStimProp_write(i, length, ptp_1, ptp_2,
                                                    std_1, std_2, median_1,
                                                    median_2, mean_1, mean_2,
                                                    median_diff_1, median_diff_2,
@@ -264,21 +267,21 @@ class dataSample:
 
                 if neuroTestResult:
                     logger.warn("findStimul # Accepted! Start: {0}, ptp_diff: {1}, std_diff: {2}, sampleSumDiff: {3}, sampleGlobalStd: {4}".format(dpwr[i]+filterSize, ptp_diff, std_diff, sampleSumDiff, sampleGlobalStd))
-                    #self.mysql_writer.dbWriteStim(sample2, sample1, length1, i, "1", self.frequency, std_diff, ptp_diff)
+                    #self.db_writer.dbWriteStim(sample2, sample1, length1, i, "1", self.frequency, std_diff, ptp_diff)
                 else:
                     dpwrMask[i] = 0
-                    #self.mysql_writer.dbWriteStim(sample2, sample1, length1, i, "0", self.frequency, std_diff, ptp_diff)
+                    #self.db_writer.dbWriteStim(sample2, sample1, length1, i, "0", self.frequency, std_diff, ptp_diff)
                     logger.warn("findStimuli # Dropped! Start: {0}, ptp_diff: {1}, std_diff: {2}, sampleSumDiff: {3}, sampleGlobalStd: {4}".format(dpwr[i]+filterSize, ptp_diff, std_diff, sampleSumDiff, sampleGlobalStd))
             else:
                 dpwrMask[i] = 0
-                #self.mysql_writer.dbWriteStim(sample2, sample1, length1, i, "0", self.frequency, std_diff, ptp_diff)
+                #self.db_writer.dbWriteStim(sample2, sample1, length1, i, "0", self.frequency, std_diff, ptp_diff)
                 logger.warn("findStimuli # Dropped! Start: {0}, ptp_diff: {1}, std_diff: {2}, sampleSumDiff: {3}, sampleGlobalStd: {4}".format(dpwr[i]+filterSize, ptp_diff, std_diff, sampleSumDiff, sampleGlobalStd))
         dpwr = dpwr[dpwrMask]
         logger.info("findStimuli # Number of finded stimuls: {0}".format(len(dpwr)))
         stimList=[[],[]]
         for i in range(len(dpwr)):
-            start = dpwr[i]+filterSize*2
-            length = self.stimulyDuration/4
+            start: int = round(dpwr[i]+filterSize*2)
+            length = round(self.stimulyDuration/4)
             if self.stimulyDuration > 35:
                 baseline = ar.histMean(data[start-int(self.stimulyDuration/7):start])
                 baseStd = data[start-int(self.stimulyDuration/7):start].std()
@@ -316,14 +319,14 @@ class dataSample:
         self.stimuli = stimList
 
     ## Вырезаем из сигнала найденные стимулы
-    def cutStimuli(self, data):
+    def cutStimuli(self, data: ndarray):
         try:
             self.findStimuli(data)
-        except:
-            logger.error("cutStimuli # Error: {0}".format(sys.exc_info()))
+        except Exception as e:
+            logger.exception("cutStimuli # Error: %s", e)
         stim = self.stimuli[0]
         if stim:
-            processedData = zeros(len(data), dtype='int')
+            processedData = zeros(len(data), dtype='float64')
             processedData += data
             logger.warn("cutStimuli # Start")
             for i in range(len(stim)):
@@ -371,12 +374,12 @@ class dataSample:
                 logger.warn("filtering # noisLevel: {0}".format(i))
             else:
                 minSD = ar.stdFinder(cD[self.deltaLen:], self.defaultFrame)
-                maxSD = ar.getLocalPtp(cD[self.deltaLen:], self.defaultFrame*0.8)
+                maxSD = ar.getLocalPtp(cD[self.deltaLen:], round(self.defaultFrame*0.8))
                 snr = maxSD / minSD
                 smoothCoef = minSD*(coeffTreshold*(snr**(i**(0.7)/(i**(1.5)+i+1)))+i*2)
                 logger.warn("filtering # minSD: {0}, maxSD: {1}, snr: {2}, level: {3}, smoothCoef: {4}".format(minSD, maxSD, snr, i, smoothCoef))
-                cD = pywt.thresholding.soft(cD, smoothCoef)
-            self.mysql_writer.dbWaveLevel_write(coeffTreshold, i, minSD, maxSD, smoothCoef)
+                cD = pywt.threshold(cD, smoothCoef, mode='soft')
+            self.db_writer.dbWaveLevel_write(coeffTreshold, i, minSD, maxSD, smoothCoef)
             coeffs[i] = cA, cD
         return iswt(coeffs, self.wavelet)
 
@@ -391,8 +394,8 @@ class dataSample:
     def spikeFinding(self):
         resultDataForSearch = self.resultRough
         resultData = self.result
-        start = self.defaultFrame/4
-        stop = -self.defaultFrame/4
+        start = round(self.defaultFrame/4)
+        stop = round(-self.defaultFrame/4)
         minimum, minimumValue = extrema(resultDataForSearch[start:stop],_max = False, _min = True, strict = False, withend = True)  # попробовать заменить на функцию из scipy
         maximum, maximumValue = extrema(resultDataForSearch[start:stop],_max = True, _min = False, strict = False, withend = True)
         minimumValue = resultData[minimum + start]
@@ -401,9 +404,9 @@ class dataSample:
         maximum = array(tmpMaximum)
         maximum.sort()
         maximumValue = resultData[maximum + start]
-        std = ar.stdFinder(self.cleanData[self.deltaLen:], self.defaultFrame)
-        SD = float16(std + std*self.snr**(0.25) / 4) # another magic
-        self.mysql_writer.dbTechInfo_clean(std, SD)
+        std = float(round(ar.stdFinder(self.cleanData[self.deltaLen:], self.defaultFrame), 3))
+        SD = float(round(float16(std + std*self.snr**(0.25) / 4), 3))
+        self.db_writer.dbTechInfo_clean(std, SD)
         logger.warn("spikeFinding # snr: {0}, std: {1}, SD: {2}".format(self.snr, std, SD))
         spikePoints=[]
         if minimum[0] < maximum[0]:
@@ -479,7 +482,7 @@ class dataSample:
     #
     def interactiveFibreSearch(self, respDictValue):
         try:
-            logger.info("interactiveFibreSerach # Response dict values: {0}".format(self.responseDict.values()))
+            logger.info("interactiveFibreSerach # Response dict values: {0}".format(list(self.responseDict.values())))
             tmpObject = getattr(self, respDictValue)
             tmpObject2 = getattr(self, tmpObject.spikes[0])
             start = tmpObject2.spikeMax1 - (tmpObject2.spikeMin-tmpObject2.spikeMax1)
@@ -500,8 +503,8 @@ class dataSample:
                     ax.plot(tmpObject2.spikeMin, self.result[tmpObject2.spikeMin],'or')
                     ax.text(tmpObject2.spikeMin, self.result[tmpObject2.spikeMin]-15, str(j), fontsize = 12, va='bottom')
                     self.minimumsForFibre.append(tmpObject2.spikeMin)
-            except:
-                logger.info("interactiveFibreSerach # Error: {0}".format(sys.exc_info()))
+            except Exception as e:
+                logger.exception("interactiveFibreSerach # Error: %s", e)
             self.fibreIndex=''
             cursor = Cursor(ax, useblit = True, color='black', linewidth = 2 )
             #_widgets=[cursor]
@@ -518,8 +521,8 @@ class dataSample:
             else:
                 tmpObject2 = getattr(self, fibre)
                 tmpObject2.fibre = 1
-        except:
-            logger.info("interactiveFibreSerach # Error wile ploating: {0}".format(sys.exc_info()))
+        except Exception as e:
+            logger.info("interactiveFibreSerach # Error wile ploating: %s", e)
 
     ## Обработка клика по графику во время интерактивного поиска волоконного ответа
     def click(self, event):
@@ -595,14 +598,14 @@ class dataSample:
         """
         responsMatrix = zeros((max(self.clusters), 2), dtype = int)#[[start1, stop1],[start2, stop2]]
         length = len(self.result)
-        smallFrame = self.defaultFrame/10
+        smallFrame = round(self.defaultFrame/10)
         logger.warn("responsLength # len(unique(self.clusters)): {0}, len(self.clusters): {1}".format(len(unique(self.clusters)), len(self.clusters)))
         for i in unique(self.clusters):
             try:
-                lastSpike = self.spikeDict.values()[list(self.clusters).index(i+1)-1]
+                lastSpike = list(self.spikeDict.values())[list(self.clusters).index(i+1)-1]
             except:
-                lastSpike = self.spikeDict.values()[-1]
-            start = self.stimuli[0][i-1]
+                lastSpike = list(self.spikeDict.values())[-1]
+            start = round(self.stimuli[0][i-1])
             baseLevel = self.result[start-smallFrame*2:start].mean()
             tmpObject = getattr(self, lastSpike)
             lastMax = tmpObject.spikeMax2
@@ -642,8 +645,8 @@ class dataSample:
                     sampleLen = stop-lastMax
                     logger.warn("responsLength # End sample length: {0}".format(sampleLen))
                     if sampleLen > 0:
-                        arFit = polyfit(array(range(sampleLen)), self.result[lastMax:stop], 2)
-                        sample = polyval(arFit, array(range(sampleLen)))
+                        arFit = polyfit(array(list(range(sampleLen))), self.result[lastMax:stop], 2)
+                        sample = polyval(arFit, array(list(range(sampleLen))))
                         extrem = where(diff(sample)==0)[0]
                         logger.warn("responsLength # number of extremums in respons length curve: {0}".format(len(extrem)))
                         if len(extrem) > 0:
@@ -710,17 +713,17 @@ class dataSample:
             tmpObject = getattr(self, self.responseDict[index])
             try:
                 try:
-                    tmpObject.spikes = array(self.spikeDict.values())[self.clusters==i]
+                    tmpObject.spikes = array(list(self.spikeDict.values()))[self.clusters==i]
                     tmpObject.responseStart = rMatrix[i-1][0]
                     tmpObject.responseEnd = rMatrix[i-1][1]
                     tmpObject.length = getResponsLength(self.result[rMatrix[i-1][0]:rMatrix[i-1][1]])*1000.0/self.frequency
                     tmpObject.response_top = max(self.result[rMatrix[i-1][0]:rMatrix[i-1][1]])
                     tmpObject.response_bottom = min(self.result[rMatrix[i-1][0]:rMatrix[i-1][1]])
-                    tmpObject.baselevel = self.result[rMatrix[i-1][0]-self.defaultFrame/2:rMatrix[i-1][0]].mean()
+                    tmpObject.baselevel = self.result[round(rMatrix[i-1][0]-self.defaultFrame/2):round(rMatrix[i-1][0])].mean()
                     tmpObject.responsNumber = i
                     tmpObject.epsp = round(tmpObject.response_top-tmpObject.baselevel, 1)
-                except:
-                    logger.error("Unexpected error wile fill response properties: {0}".format(sys.exc_info()))
+                except Exception as e:
+                    logger.exception("Unexpected error wile fill response properties: %s", e)
                 try:
                     self.setSpikeDelays(tmpObject.spikes, tmpObject.responseStart)
                 except:
@@ -750,17 +753,17 @@ class dataSample:
     def writeData(self):
         if self.argDict["write"]:
             try:
-                self.mysql_writer.dbWriteNumberOfResponses(len(self.responseDict.values()))
+                self.db_writer.dbWriteNumberOfResponses(len(list(self.responseDict.values())))
             except:
                 logger.error("Unexpected error wile dbWriteNumberOfResponses: {0}".format(sys.exc_info()))
-            for i in self.responseDict.values():
+            for i in list(self.responseDict.values()):
                 tmpObject = getattr(self, i)
-                self.mysql_writer.dbWriteResponse(tmpObject)
+                self.db_writer.dbWriteResponse(tmpObject)
 
                 try:
                     for j in tmpObject.spikes:
                         tmpObject2 = getattr(self, j)
-                        self.mysql_writer.dbWriteSpike(tmpObject2)
+                        self.db_writer.dbWriteSpike(tmpObject2)
                 except:
                     logger.error("Unexpected error wile dbWriteSpike: {0}".format(sys.exc_info()))
-            self.mysql_writer.dbCommit()
+            self.db_writer.dbCommit()
